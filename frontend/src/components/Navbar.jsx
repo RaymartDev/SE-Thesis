@@ -1,0 +1,34 @@
+import {Link} from "react-router-dom"
+import SELogo from "../img/SELogo.png"
+
+const Navbar = () => {
+    return (
+        <>
+            <div className="bg-[#123E59]">
+                <nav className="h-20 container m-auto flex items-center justify-between">
+                    <div className="flex items-center cursor-pointer">
+                        <img src={SELogo}/><p className="text-3xl font-extrabold text-white uppercase">SE <span className="text-3xl font-extrabold text-[#F6B51D] uppercase">Tech</span></p>
+                    </div>
+                    <div className="text-white flex gap-x-8">
+                        <Link to="#">Home</Link>
+                        <Link to="#">Services</Link>
+                        <Link to="#">Features</Link>
+                        <Link to="#">About</Link>
+                        <Link to="#">Contacts</Link>
+                    </div>
+                    <div className="text-white flex gap-x-8">
+                        <button className="border-2 font-semibold w-20 h-7 rounded-md">
+                            Login
+                        </button>
+
+                        <button className="border-2 font-semibold border-[#F6B51D] w-20 h-7 rounded-md bg-[#F6B51D] text-[#123E59]">
+                            Signup
+                        </button>
+                    </div>
+                </nav>
+            </div>
+        </>
+    )
+}
+
+export default Navbar
