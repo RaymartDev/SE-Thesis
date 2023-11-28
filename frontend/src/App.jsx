@@ -1,17 +1,21 @@
 import {BrowserRouter, Route, Routes} from 'react-router-dom'
-import Landing from './Landing'
-import Login from './views/Login'
-import Register from './views/Register'
+import {lazy, Suspense} from "react"
+
+const Landing = lazy(() => import("./Landing"))
+const Register = lazy(() => import("./views/Register"))
+const Login = lazy(() => import("./views/Login"))
 
 function App() {
   return (
     <>
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Landing />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-        </Routes>
+        <Suspense fallback={<h1>...Loading</h1>}>
+          <Routes>
+            <Route path="/" element={<Landing />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+          </Routes>
+        </Suspense>
       </BrowserRouter>
     </>
   )
