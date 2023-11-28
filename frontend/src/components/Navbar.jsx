@@ -1,5 +1,7 @@
 import {Link, useNavigate} from "react-router-dom"
 import SELogo from "../img/SELogo.png"
+import bg1 from "../img/whitebg.png"
+import bg2 from "../img/bg.png"
 
 const Navbar = () => {
     const navigate = useNavigate()
@@ -35,6 +37,13 @@ const Navbar = () => {
                         </button>
                     </div>
                 </nav>
+            </div>
+
+            <div>
+                <div className="flex">
+                    <img src={bg1}/> <img src={bg2}/>
+                </div>
+                
             </div>
         </>
     )
