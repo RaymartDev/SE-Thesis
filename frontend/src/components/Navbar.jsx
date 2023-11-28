@@ -1,7 +1,16 @@
-import {Link} from "react-router-dom"
+import {Link, useNavigate} from "react-router-dom"
 import SELogo from "../img/SELogo.png"
 
 const Navbar = () => {
+    const navigate = useNavigate()
+
+    const clickLogin = () => {
+        navigate("/login")
+    }
+    
+    const clickRegister = () => {
+        navigate("/register")
+    }
     return (
         <>
             <div className="bg-[#123E59]">
@@ -10,18 +19,18 @@ const Navbar = () => {
                         <img src={SELogo}/><p className="text-3xl font-extrabold text-white uppercase">SE <span className="text-3xl font-extrabold text-[#F6B51D] uppercase">Tech</span></p>
                     </div>
                     <div className="text-white flex gap-x-8">
-                        <Link to="#">Home</Link>
+                        <Link to="/">Home</Link>
                         <Link to="#">Services</Link>
                         <Link to="#">Features</Link>
                         <Link to="#">About</Link>
                         <Link to="#">Contacts</Link>
                     </div>
                     <div className="text-white flex gap-x-8">
-                        <button className="border-2 font-semibold w-20 h-7 rounded-md">
+                        <button onClick={clickLogin} className="border-2 font-semibold w-20 h-7 rounded-md">
                             Login
                         </button>
 
-                        <button className="border-2 font-semibold border-[#F6B51D] w-20 h-7 rounded-md bg-[#F6B51D] text-[#123E59]">
+                        <button onClick={clickRegister} className="border-2 font-semibold border-[#F6B51D] w-20 h-7 rounded-md bg-[#F6B51D] text-[#123E59]">
                             Signup
                         </button>
                     </div>

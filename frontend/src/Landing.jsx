@@ -4,7 +4,7 @@ const Landing = () => {
     return (
         <>
             <Navbar />
-            
+            Landing
         </>
     )
 }
