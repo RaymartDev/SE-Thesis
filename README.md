@@ -1,2 +1,2 @@
-# sethesis
-SE Tech Hive Thesis Project
+# SE Tech Hive
+Imagination mo ang limit
