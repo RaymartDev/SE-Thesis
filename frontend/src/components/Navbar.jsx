@@ -1,7 +1,5 @@
 import {Link, useNavigate} from "react-router-dom"
 import SELogo from "../img/SELogo.png"
-import bg1 from "../img/whitebg.png"
-import bg2 from "../img/bg.png"
 
 const Navbar = () => {
     const navigate = useNavigate()
@@ -20,12 +18,12 @@ const Navbar = () => {
                     <div className="flex items-center cursor-pointer">
                         <img src={SELogo}/><p className="text-3xl font-extrabold text-white uppercase">SE <span className="text-3xl font-extrabold text-[#F6B51D] uppercase">Tech</span></p>
                     </div>
-                    <div className="text-white flex gap-x-8">
-                        <Link to="/">Home</Link>
-                        <Link to="#">Services</Link>
-                        <Link to="#">Features</Link>
-                        <Link to="#">About</Link>
-                        <Link to="#">Contacts</Link>
+                    <div className="text-white flex gap-x-8 ">
+                        <Link to="/" className="hover:text-[#F6B51D]">Home</Link>
+                        <Link to="#" className="hover:text-[#F6B51D]">Services</Link>
+                        <Link to="#" className="hover:text-[#F6B51D]">Features</Link>
+                        <Link to="#" className="hover:text-[#F6B51D]">About</Link>
+                        <Link to="#" className="hover:text-[#F6B51D]">Contacts</Link>
                     </div>
                     <div className="text-white flex gap-x-8">
                         <button onClick={clickLogin} className="border-2 font-semibold w-20 h-7 rounded-md">
@@ -37,13 +35,6 @@ const Navbar = () => {
                         </button>
                     </div>
                 </nav>
-            </div>
-
-            <div>
-                <div className="flex">
-                    <img src={bg1}/> <img src={bg2}/>
-                </div>
-                
             </div>
         </>
     )

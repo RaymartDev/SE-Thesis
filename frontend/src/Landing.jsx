@@ -1,10 +1,11 @@
 import Navbar from "./components/Navbar"
+import Main from "./components/Main"
 
 const Landing = () => {
     return (
         <>
             <Navbar />
-            Landing
+            <Main />
         </>
     )
 }
