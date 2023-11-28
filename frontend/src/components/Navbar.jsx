@@ -30,11 +30,11 @@ const Navbar = () => {
                         <Link to="#" className="hover:text-[#F6B51D]">Contacts</Link>
                     </div>
                     <div className="text-white flex gap-x-8">
-                        <button onClick={clickLogin} className="border-2 font-semibold w-20 h-7 rounded-md">
+                        <button onClick={clickLogin} className="hover:scale-110 transition duration-400 border-2 font-semibold w-20 h-7 rounded-md">
                             Login
                         </button>
 
-                        <button onClick={clickRegister} className="border-2 font-semibold border-[#F6B51D] w-20 h-7 rounded-md bg-[#F6B51D] text-[#123E59]">
+                        <button onClick={clickRegister} className="hover:scale-110 transition duration-400 border-2 font-semibold border-[#F6B51D] w-20 h-7 rounded-md bg-[#F6B51D] text-[#123E59]">
                             Signup
                         </button>
                     </div>
