@@ -163,7 +163,7 @@ const Landing = () => {
                             <input type="text" placeholder="Email Address" className="mt-5 w-5/6 p-2 rounded"/><br />
                             <input type="text" placeholder="Phone Number" className="mt-5 w-5/6 p-2 rounded"/><br />
                             <input type="text" placeholder="Message" className="mt-5 w-5/6 pb-32 text-left p-2 rounded"/><br />
-                            <button></button>
+                            <button className="text-center bg-[#123E59] text-[#F6B51D]">Submit</button>
                         </div>
                         <div className="flex flex-col justify-around">
                             <div>
