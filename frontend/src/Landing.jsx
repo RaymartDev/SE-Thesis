@@ -155,15 +155,19 @@ const Landing = () => {
                 <section className="container mx-auto mt-20">
                     <h1 className="text-5xl font-extrabold">Contact Us</h1>
                     <div className="grid grid-cols-2 gap-20">
-                        <div className=" bg-[#F6F6F6] p-10 mt-14 rounded">
+                        <div className="bg-[#F6F6F6] p-10 mt-14 rounded">
                             <h1 className="text-3xl font-bold">Get in Touch</h1>
                             <p className="mt-3 mb-3">Ask us anything or just say hi...</p>
 
-                            <input type="text" placeholder="Firstname" className="p-2 rounded"/> <input type="text" placeholder="Lastname" className="p-2 rounded"/><br />
-                            <input type="text" placeholder="Email Address" className="mt-5 w-5/6 p-2 rounded"/><br />
-                            <input type="text" placeholder="Phone Number" className="mt-5 w-5/6 p-2 rounded"/><br />
-                            <input type="text" placeholder="Message" className="mt-5 w-5/6 pb-32 text-left p-2 rounded"/><br />
-                            <button className="text-center bg-[#123E59] text-[#F6B51D]">Submit</button>
+                            <input type="text" placeholder="Firstname" className="py-2 px-5 rounded mr-5 mt-5 bg-[#E4E4E4]"/> 
+                            <input type="text" placeholder="Lastname" className="py-2 px-5 rounded bg-[#E4E4E4]"/><br />
+                            <input type="text" placeholder="Email Address" className="mt-5 w-full py-2 px-5 rounded bg-[#E4E4E4]"/><br />
+                            <input type="text" placeholder="Phone Number" className="mt-5 w-full py-2 px-5 rounded bg-[#E4E4E4]"/><br />
+                            <input type="text" placeholder="Message" className="mt-5 w-full pb-32 text-left py-2 px-5 rounded bg-[#E4E4E4]"/><br />
+                            <div className="flex item-center justify-center">
+                                <button className="text-center font-bold bg-[#123E59] text-[#F6B51D] p-2 px-5 rounded mt-4">Submit</button>
+                            </div>
+                            
                         </div>
                         <div className="flex flex-col justify-around">
                             <div>
