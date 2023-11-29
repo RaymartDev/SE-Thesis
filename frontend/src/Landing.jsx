@@ -32,7 +32,7 @@ const Landing = () => {
                 </div>
             </main>
 
-            <section>
+            <section id="services">
                 <h1 className="text-center text-black font-extrabold text-5xl mt-64">Our Services</h1>
                 <div className="grid grid-cols-4 container m-auto mt-10 gap-10">
                     <Card
@@ -79,7 +79,7 @@ const Landing = () => {
                 </div>
             </section>
 
-                <section className="bg-[#123E59] mt-20">
+                <section id="features" className="bg-[#123E59] mt-20">
                     <div className="grid grid-cols-3 container m-auto gap-20 pt-20 pb-20 text-white">
                         <div>
                             <h1 className="font-extrabold text-5xl">Our Features</h1>
@@ -108,7 +108,7 @@ const Landing = () => {
                     </div>
                 </section>
 
-                <section className="grid grid-cols-2 container mx-auto mt-20 gap-10">
+                <section id="about" className="grid grid-cols-2 container mx-auto mt-20 gap-10">
                     <div className="flex items-center justify-center">
                         <img src={Team}/>
                     </div>
@@ -152,7 +152,7 @@ const Landing = () => {
                     </div>
                 </section>
 
-                <section className="container mx-auto mt-20">
+                <section id="contacts" className="container mx-auto mt-20">
                     <h1 className="text-5xl font-extrabold">Contact Us</h1>
                     <div className="grid grid-cols-2 gap-20">
                         <div className="bg-[#F6F6F6] p-10 mt-14 rounded">
