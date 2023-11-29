@@ -2,7 +2,6 @@
   "name": "frontend",
   "private": true,
   "version": "0.0.0",
-  "proxy":"https://setech.onrender.com",
   "type": "module",
   "scripts": {
     "dev": "vite",
