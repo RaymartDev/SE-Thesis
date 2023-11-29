@@ -2,8 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
+*::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+*::-webkit-scrollbar-track {
+    background: #123E59;
+    border-radius: 2px;
+}
+  
+*::-webkit-scrollbar-thumb {
+    background-color: #F6B51D;
+    border-radius: 4px;
+    border: 2px #123E59;
+}
+
 @layer base {
     html {
         font-family: 'Outfit', sans-serif;
     }
-    }
+}

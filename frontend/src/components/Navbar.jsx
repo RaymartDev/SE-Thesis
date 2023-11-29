@@ -47,9 +47,9 @@ const Navbar = () => {
     const { userInfo } = useSelector((state) => state.auth)
     return (
         <>
-            <div className="bg-[#123E59]">
+            <div className="bg-[#123E59] fixed w-full z-50 top-0">
                 <nav className="h-20 container m-auto flex items-center justify-between">
-                    <div id="top" className="flex items-center cursor-pointer" onClick={clickHome}>
+                    <div className="flex items-center cursor-pointer" onClick={clickHome}>
                         <img src={SELogo}/><p className="text-3xl font-extrabold text-white uppercase">SE <span className="text-3xl font-extrabold text-[#F6B51D] uppercase">Tech</span></p>
                     </div>
                     {userInfo ? (<h1 className="font-bold text-white">Welcome {userInfo.name}</h1>) : (<div className="text-white flex gap-x-8 ">

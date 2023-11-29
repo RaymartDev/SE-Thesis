@@ -20,7 +20,7 @@ const Landing = () => {
     return (
         <>
             <Navbar />
-            <main>
+            <main id="top">
                 <div>
                     <div className="flex justify-end relative ">
                         <img src={bg2} className="absolute w-3/5 "/>

@@ -6,6 +6,7 @@ import { setCredentials } from "../slices/authSlice"
 import { toast } from 'react-toastify'
 import { useRegisterMutation } from "../slices/usersApiSlice"
 import Spinner from "../components/Spinner"
+import Footer from "../components/Footer"
 
 const Register = () => {
     const [email, setEmail] = useState("")
@@ -68,6 +69,7 @@ const Register = () => {
                     {isLoading && <Spinner />}
                 </form>
             </section>
+            <Footer />
         </>
     )
 }

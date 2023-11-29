@@ -6,6 +6,7 @@ import { useLoginMutation } from "../slices/usersApiSlice"
 import { setCredentials } from '../slices/authSlice'
 import { toast } from "react-toastify"
 import Spinner from "../components/Spinner"
+import Footer from "../components/Footer"
 
 const Login = () => {
     const [email, setEmail] = useState("")
@@ -66,7 +67,7 @@ const Login = () => {
                     {isLoading && <Spinner />}
                 </form>
             </section>
-            
+            <Footer />
         </>
     )
 }
