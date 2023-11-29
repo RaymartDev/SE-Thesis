@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom"
-import SELogo from "../img/SELogo.png"
+import SELogo from "../img/SElogo.png"
 import Login from "../views/Login"
 import { useSelector, useDispatch } from "react-redux"
 import { useLogoutMutation } from "../slices/usersApiSlice"
