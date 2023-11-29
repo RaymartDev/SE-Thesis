@@ -29,8 +29,8 @@ const Navbar = () => {
             await logoutApiCall().unwrap()
             dispatch(logout())
             toast('🦄 Goodbye', {
-                position: "top-right",
-                autoClose: 1000,
+                position: "bottom-left",
+                autoClose: 2000,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: false,

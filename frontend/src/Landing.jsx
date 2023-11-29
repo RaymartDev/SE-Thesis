@@ -12,6 +12,9 @@ import Card from "./components/Card"
 import Feature from "./components/Feature"
 import Footer from "./components/Footer"
 import TeamCard from "./components/TeamCard"
+import pm from "./img/pm.jpg"
+import pm2 from "./img/pm2.jpg"
+import pm3 from "./img/pm3.jpg"
 
 const Landing = () => {
     return (
@@ -135,19 +138,19 @@ const Landing = () => {
                     <h1 className="text-5xl font-extrabold text-center">The Team</h1>
                     <div className="grid grid-cols-3 gap-10">
                         <TeamCard 
-                            name="Name"
-                            pos="Position"
-                            img=""
+                            name="Raymart Sarmiento"
+                            pos="Project Manager/FullStack"
+                            img={pm}
                         />
                         <TeamCard 
-                            name="Name"
-                            pos="Position"
-                            img=""
+                            name="Micholo Buenafe"
+                            pos="UI/UX Developer"
+                            img={pm2}
                         />
                         <TeamCard 
-                            name="Name"
-                            pos="Position"
-                            img=""
+                            name="Leansel Nico Ortega"
+                            pos="Frontend Developer"
+                            img={pm3}
                         />
                     </div>
                 </section>
@@ -180,8 +183,8 @@ const Landing = () => {
                             </div>
                             <div>
                                 <div className="text-2xl font-extrabold">
-                                    <div className="flex items-center"><img src={Phone} className="mr-3"/><p>+1234 567 890</p></div>
-                                    <div className="flex items-center mt-5"><img src={Envelope} className="mr-3"/><p>customerservices@setechhive.ph</p></div>
+                                    <div className="flex items-center"><img src={Phone} className="mr-3"/><p>+63 967 947 2818</p></div>
+                                    <div className="flex items-center mt-5"><img src={Envelope} className="mr-3"/><p>setech</p></div>
                                 </div>
                             </div>
                         </div>

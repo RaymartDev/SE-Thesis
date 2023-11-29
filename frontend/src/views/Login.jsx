@@ -30,7 +30,7 @@ const Login = () => {
             const res = await login({ email, password }).unwrap()
             dispatch(setCredentials({ ...res }))
             toast.success('You have logged in successfully', {
-                position: "top-right",
+                position: "bottom-left",
                 autoClose: 1000,
                 hideProgressBar: false,
                 closeOnClick: true,
@@ -41,7 +41,16 @@ const Login = () => {
                 })
             navigate('/')
         }catch (err) {
-            toast.error(err?.data?.message || err.error)
+            toast.error(err?.data?.message || err.error, {
+                position: "bottom-left",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                })
         }
     }
 
@@ -49,7 +58,7 @@ const Login = () => {
         <>
             <Navbar />
             <section>
-                <form className="container mx-auto flex flex-col items-center my-60 bg-[#F6F6F6] w-1/5 rounded" onSubmit={submitHandler}>
+                <form className="container mx-auto flex flex-col items-center my-60 bg-[#F6F6F6] w-1/5 rounded border-2 border-black" onSubmit={submitHandler}>
                     <h1 className="text-2xl font-bold mt-5">Login</h1>
                     <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" placeholder="Email" required className="w-9/12 mt-8 px-5 py-2 rounded bg-[#E4E4E4]"/>
                     <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder="Password" required className="w-9/12 mt-5 px-5 py-2 rounded bg-[#E4E4E4]"/>
