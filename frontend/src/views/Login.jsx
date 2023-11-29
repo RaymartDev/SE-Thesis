@@ -4,11 +4,13 @@ const Login = () => {
     return (
         <>
             <Navbar />
-            <section className="flex flex-col items-center justify-center bg-slate-50 w-50% h-50%">
-                <input type="text" className="w-20 bg-slate-200 mt-10 rounded"/>
-                <input type="email" className="w-20 bg-slate-200 mt-5 rounded"/>
-                <input type="password" className="w-20 bg-slate-200 mt-5 rounded"/>
+            <section className="w-3/4 h-full bg-slate-500">
+                <section className="flex flex-col w-2/4 bg-slate-50 h-3/4">
+                    <input type="email" placeholder="Email" className="w-20 bg-slate-200 mt-5 rounded"/>
+                    <input type="password" placeholder="Password" className="w-20 bg-slate-200 mt-5 rounded"/>
+                </section>
             </section>
+            
         </>
     )
 }
