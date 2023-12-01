@@ -3,7 +3,7 @@ import footerLogo from "../img/footerlogo.png"
 
 const Footer = () => {
     return (
-        <footer className="bg-[#123E59] relative bottom-0">
+        <footer className="bg-[#123E59] relative bottom-0 ">
             <div className="flex justify-around items-end h-60 pb-10">
                 <div className="text-white flex gap-x-20 font-bold text-xl">
                     <HashLink smooth to="/#top" className="hover:text-[#F6B51D]">Home</HashLink>
