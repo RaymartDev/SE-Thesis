@@ -1,9 +1,10 @@
 import asyncHandler from 'express-async-handler'
 import User from '../models/userModel.js'
 import generateToken from '../utils/generateToken.js'
+import validator from 'validator';
 
 const registerUser = asyncHandler(async (req, res) => {
-    const { name, email, password } = req.body
+    const { name, email, password, username, address, birthDate, contact, gender } = req.body
 
     const userExists = await User.findOne({ email })
 
@@ -15,7 +16,12 @@ const registerUser = asyncHandler(async (req, res) => {
     const user = await User.create({
         name,
         email,
-        password
+        password,
+        username,
+        address,
+        birthDate,
+        contact,
+        gender
     })
 
     if(user) {
@@ -24,6 +30,11 @@ const registerUser = asyncHandler(async (req, res) => {
             _id: user._id,
             name: user.name,
             email: user.email,
+            username: user.username,
+            address: user.address,
+            birthDate: user.birthDate,
+            contact: user.contact,
+            gender: user.gender
         })
     } else {
         res.status(400)
@@ -32,15 +43,25 @@ const registerUser = asyncHandler(async (req, res) => {
 })
 
 const loginUser = asyncHandler(async (req, res) => {
-    const { email, password } = req.body
+    const { username, password } = req.body
 
-    const user = await User.findOne({ email })
+    let user;
+    if (validator.isEmail(username)) {
+      user = await User.findOne({ email: username });
+    } else {
+      user = await User.findOne({ username });
+    }
     if(user && (await user.matchPasswords(password))) {
         generateToken(res, user._id)
         res.status(201).json({
             _id: user._id,
             name: user.name,
             email: user.email,
+            username: user.username,
+            address: user.address,
+            birthDate: user.birthDate,
+            contact: user.contact,
+            gender: user.gender
         })
     } else {
         res.status(401)
@@ -61,7 +82,12 @@ const getUserProfile = asyncHandler(async (req, res) => {
     const user = {
         _id: req.user.id,
         name: req.user.name,
-        email: req.user.email
+        email: req.user.email,
+        username: req.user.username,
+        address: req.user.address,
+        birthDate: req.user.birthDate,
+        contact: req.user.contact,
+        gender: req.user.gender
     }
 
     res.status(200).json(user)
