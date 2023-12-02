@@ -6,13 +6,23 @@ import { setCredentials } from "../slices/authSlice"
 import { toast } from 'react-toastify'
 import { useRegisterMutation } from "../slices/usersApiSlice"
 import Spinner from "../components/Spinner"
-import Footer from "../components/Footer"
 import SELogo from "../img/Logo.png"
 
 const Register = () => {
-    const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
+    const [role, setRole] = useState("client")
     const [name, setName] = useState("")
+    const [gender, setGender] = useState("")
+    const [birthDate, setBirthDate] = useState("")
+    const [contactNumber, setContactNumber] = useState("")
+    const [address, setAddress] = useState("")
+    const [username, setUsername] = useState("")
+    const [password, setPassword] = useState("")
+    const [password2, setPassword2] = useState("")
+    const [email, setEmail] = useState("")
+
+    const handleRadio = (event) => {
+        setRole(event.target.value.toLowerCase());
+    }
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -20,6 +30,12 @@ const Register = () => {
     const [register, { isLoading }] = useRegisterMutation();
 
     const { userInfo } = useSelector((state) => state.auth)
+
+
+    const navigateToLogin = (e) => {
+        e.preventDefault()
+        navigate('/login')
+    }
 
     useEffect(() => {
         if(userInfo) {
@@ -30,7 +46,7 @@ const Register = () => {
     const submitHandler = async (e) => {
         e.preventDefault()
         try {
-            const res = await register({ name, email, password }).unwrap()
+            const res = await register({ role, name, gender, birthDate, contact: contactNumber, address, username, password, email }).unwrap()
             dispatch(setCredentials({ ...res }))
             toast.success('You have been registered successfully', {
                 position: "bottom-left",
@@ -72,6 +88,7 @@ const Register = () => {
                             <div>
                                 <h1 className="text-white font-bold text-4xl w-48">Hello Welcome!</h1> 
                                 <p className="text-white font-extralight text-xs mt-6">Already have an account?</p>
+                                <button onClick={navigateToLogin} className="bg-[#F6B51D] text-[#123E59] font-bold rounded-full py-3 px-5 mt-2">Log In</button>
                                 <button className="bg-[#F6B51D] text-[#123E59] font-bold rounded-full py-2 px-4 mt-2">Log In</button>
                             </div>
 
@@ -83,50 +100,50 @@ const Register = () => {
                                 <p className="mt-3 text-sm">Please input your information to create an account</p>
                                 <p className="mt-5 text-sm">Create an account as a:</p>
 
-                                <form className="flex mt-1">
-                                    <input type="radio" name="client" className="mr-1"/>
+                                <div className="flex mt-1">
+                                    <input type="radio" checked={role === 'client'} value='client' onChange={handleRadio} name="role" className="cursor-pointer mr-1"/>
                                     <label htmlFor="client" className="mr-5 font-extrabold ">Client</label>
-                                    <input type="radio" name="freelancer" className="mr-1"/>
+                                    <input type="radio" name="role" checked={role === 'freelancer'} value='freelancer' onChange={handleRadio} className="cursor-pointer mr-1"/>
                                     <label htmlFor="freelancer" className="font-extrabold">Freelancer</label>
-                                </form>
+                                </div>
 
                                 <div className="flex mt-2">
                                     <div className="flex flex-col mr-5 w-9/12">
                                         <label htmlFor="fullName" className="font-extrabold">Full Name</label>
-                                        <input type="text" name="fullName" placeholder="Full Name" className="mt-2 rounded-xl bg-[#D9D9D9] pl-3 py-1"/>
+                                        <input value={name} onChange={(e) => setName(e.target.value)} type="text" name="fullName" placeholder="Full Name" className="mt-2 rounded-xl bg-[#D9D9D9] pl-3 py-1"/>
                                     </div>
                                     <div className="flex flex-col w-1/4">
                                         <label htmlFor="age" className="font-extrabold">Gender</label>
-                                        <input type="text" name="age" placeholder="Gender" className="mt-2 rounded-xl bg-[#D9D9D9] pl-3 py-1" />
+                                        <input value={gender} onChange={(e) => setGender(e.target.value)} type="text" name="age" placeholder="Gender" className="mt-2 rounded-xl bg-[#D9D9D9] pl-3 py-1" />
                                     </div>
                                 </div>
 
                                 <div className="flex">
                                     <div className="flex flex-col mr-5 w-2/5">
                                         <label htmlFor="birthDate" className="font-extrabold mt-2">Birthdate</label>
-                                        <input type="date" name="birthDate" placeholder="MM/DD/YYYY" className="mt-2 rounded-xl bg-[#D9D9D9] pl-3 py-1"/>
+                                        <input value={birthDate} onChange={(e) => setBirthDate(e.target.value)} type="date" name="birthDate" placeholder="MM/DD/YYYY" className="mt-2 rounded-xl bg-[#D9D9D9] pl-3 py-1"/>
                                     </div>
                                     <div className="flex flex-col w-8/12">
                                         <label htmlFor="contactNumber" className="font-extrabold mt-2">Contact Number</label>
-                                        <input type="text" name="contactNumber" placeholder="Contact Number" className="mt-2 rounded-xl bg-[#D9D9D9] pl-3 py-1"/>
+                                        <input value={contactNumber} onChange={(e) => setContactNumber(e.target.value)} type="text" name="contactNumber" placeholder="Contact Number" className="mt-2 rounded-xl bg-[#D9D9D9] pl-3 py-1"/>
                                     </div>
                                 </div>
 
                                 <label htmlFor="Address" className="font-extrabold mt-2">Address</label>
-                                <input type="text" name="Address" placeholder="Address" className="mt-2 rounded-xl bg-[#D9D9D9] pl-3 py-1"/>
+                                <input value={address} onChange={(e) => setAddress(e.target.value)} type="text" name="Address" placeholder="Address" className="mt-2 rounded-xl bg-[#D9D9D9] pl-3 py-1"/>
                                 <label htmlFor="emailAddress" className="font-extrabold mt-2">Email Address</label>
-                                <input type="text" name="emailAddress" placeholder="Email Address" className="mt-2 rounded-xl bg-[#D9D9D9] pl-3 py-1"/>
+                                <input value={email} onChange={(e) => setEmail(e.target.value)} type="text" name="emailAddress" placeholder="Email Address" className="mt-2 rounded-xl bg-[#D9D9D9] pl-3 py-1"/>
                                 <label htmlFor="username" className="font-extrabold mt-2">Username</label>
-                                <input type="text" name="username" placeholder="Username" className="mt-2 rounded-xl bg-[#D9D9D9] pl-3 py-1"/>
+                                <input value={username} onChange={(e) => setUsername(e.target.value)} type="text" name="username" placeholder="Username" className="mt-2 rounded-xl bg-[#D9D9D9] pl-3 py-1"/>
 
                                 <div className="flex justify-between mt-2">
                                     <div className="flex flex-col">
                                         <label htmlFor="password" className="font-extrabold">Password</label>
-                                        <input type="password" name="password" placeholder="Password" className="mt-2 rounded-xl bg-[#D9D9D9] pl-3 py-1"/>
+                                        <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" name="password" placeholder="Password" className="mt-2 rounded-xl bg-[#D9D9D9] pl-3 py-1"/>
                                     </div>
                                     <div className="flex flex-col">
                                         <label htmlFor="rePassword" className="font-extrabold">Repassword</label>
-                                        <input type="password" name="rePassword" placeholder="Repassword" className="mt-2 rounded-xl bg-[#D9D9D9] pl-3 py-1"/>
+                                        <input value={password2} onChange={(e) => setPassword2(e.target.value)} type="password" name="rePassword" placeholder="Repassword" className="mt-2 rounded-xl bg-[#D9D9D9] pl-3 py-1"/>
                                     </div>
                                 </div>
                                 
