@@ -46,7 +46,7 @@ const Register = () => {
     const submitHandler = async (e) => {
         e.preventDefault()
         try {
-            const res = await register({ role, name, gender, birthDate, contactNumber, address, username, password }).unwrap()
+            const res = await register({ role, name, gender, birthDate, contact: contactNumber, address, username, password, email }).unwrap()
             dispatch(setCredentials({ ...res }))
             toast.success('You have been registered successfully', {
                 position: "bottom-left",
@@ -100,9 +100,9 @@ const Register = () => {
                                 <p className="mt-5 text-sm">Create an account as a:</p>
 
                                 <div className="flex mt-1">
-                                    <input type="radio" checked={role === 'client'} value='client' onChange={handleRadio} name="role" className="mr-1"/>
+                                    <input type="radio" checked={role === 'client'} value='client' onChange={handleRadio} name="role" className="cursor-pointer mr-1"/>
                                     <label htmlFor="client" className="mr-5 font-extrabold ">Client</label>
-                                    <input type="radio" name="role" checked={role === 'freelancer'} value='freelancer' onChange={handleRadio} className="mr-1"/>
+                                    <input type="radio" name="role" checked={role === 'freelancer'} value='freelancer' onChange={handleRadio} className="cursor-pointer mr-1"/>
                                     <label htmlFor="freelancer" className="font-extrabold">Freelancer</label>
                                 </div>
 
