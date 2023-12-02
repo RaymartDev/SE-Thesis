@@ -72,7 +72,7 @@ const Register = () => {
                             <div>
                                 <h1 className="text-white font-bold text-4xl w-48">Hello Welcome!</h1> 
                                 <p className="text-white font-extralight text-xs mt-6">Already have an account?</p>
-                                <button className="bg-[#F6B51D] text-[#123E59] font-bold rounded-full py-3 px-5 mt-2">Log In</button>
+                                <button className="bg-[#F6B51D] text-[#123E59] font-bold rounded-full py-2 px-4 mt-2">Log In</button>
                             </div>
 
                         </div>

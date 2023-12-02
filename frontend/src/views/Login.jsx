@@ -88,7 +88,7 @@ const Login = () => {
                                 <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder="Password" name="password" required className="mt-2 px-5 py-2 rounded-xl bg-[#D9D9D9]"/>
                                 <div className="flex justify-around mt-3">
                                     <form>
-                                        <input type="radio" name="rememberMe" id="rememberMe" className="mr-1"/>
+                                        <input type="checkbox" name="rememberMe" id="rememberMe" className="mr-1"/>
                                         <label htmlFor="rememberMe" className="font-extralight">Remember me</label>  
                                     </form>
                                     <div>
