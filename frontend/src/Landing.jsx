@@ -15,8 +15,27 @@ import TeamCard from "./components/TeamCard"
 import pm from "./img/pm.jpg"
 import pm2 from "./img/pm2.jpg"
 import pm3 from "./img/pm3.jpg"
+import { useNavigate } from "react-router-dom"
+import { useState } from "react"
 
 const Landing = () => {
+
+    const [fname, setFname] = useState("")
+    const [lname, setLname] = useState("")
+    const [email, setEmail] = useState("")
+    const [phone, setPhone] = useState("")
+    const [message, setMessage] = useState("")
+
+    const handleContact = (e) => {
+        e.preventDefault()
+    }
+
+    const navigate = useNavigate()
+    const handleButton = (e) => {
+        e.preventDefault()
+        navigate("/register")
+    }
+
     return (
         <>
             <Navbar />
@@ -28,7 +47,7 @@ const Landing = () => {
                     <div className="container mx-60 my-52 w-2/5 text-[#000000]">
                         <h1 className="font-extrabold text-5xl">You Idea is our passion. The only limit is your imagination</h1>
                         <p className="mt-8 text-[#000000] font-light text-2xl w-96">Be One of Us or Experience our Greatness!</p>
-                        <button className="bg-[#123E59] text-[#FFFFFF] font-extrabold text-4 py-2 px-4 rounded hover:text-[#F6B51D] mt-5">
+                        <button onClick={handleButton} className="bg-[#123E59] text-[#FFFFFF] font-extrabold text-4 py-2 px-4 rounded hover:text-[#F6B51D] mt-5">
                             Explore More
                         </button>
                     </div>
@@ -77,7 +96,7 @@ const Landing = () => {
                         Nunc vulputate.</h1>  
                     </div>
                     <div className="flex justify-center items-center"  >
-                        <button className="bg-black text-white rounded px-5 py-2 font-bold hover:text-[#F6B51D]">See all</button>
+                        <button onClick={handleButton} className="bg-black text-white rounded px-5 py-2 font-bold hover:text-[#F6B51D]">See all</button>
                     </div>
                 </div>
             </section>
@@ -90,7 +109,7 @@ const Landing = () => {
                                 Nunc vulputate libero et velit interdum, ac aliquet odio mattis. 
                                 Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. 
                                 Curabitur tempus urna at turpis condimentum lobortis.</p>
-                            <button className="bg-[#F6B51D] text-[#123E59] px-5 py-2 rounded font-bold mt-8">Learn More</button>
+                            <button onClick={handleButton} className="bg-[#F6B51D] text-[#123E59] px-5 py-2 rounded font-bold mt-8">Learn More</button>
                         </div>
                         <div className="flex flex-col justify-around text-center">
                             <Feature 
@@ -162,13 +181,13 @@ const Landing = () => {
                             <h1 className="text-3xl font-bold">Get in Touch</h1>
                             <p className="mt-3 mb-3">Ask us anything or just say hi...</p>
 
-                            <input type="text" placeholder="Firstname" className="py-2 px-5 rounded mr-5 mt-5 bg-[#E4E4E4]"/> 
-                            <input type="text" placeholder="Lastname" className="py-2 px-5 rounded bg-[#E4E4E4]"/><br />
-                            <input type="text" placeholder="Email Address" className="mt-5 w-full py-2 px-5 rounded bg-[#E4E4E4]"/><br />
-                            <input type="text" placeholder="Phone Number" className="mt-5 w-full py-2 px-5 rounded bg-[#E4E4E4]"/><br />
-                            <input type="text" placeholder="Message" className="mt-5 w-full pb-32 text-left py-2 px-5 rounded bg-[#E4E4E4]"/><br />
+                            <input value={fname} onChange={(e) => setFname(e.target.value)} type="text" placeholder="Firstname" className="py-2 px-5 rounded mr-5 mt-5 bg-[#E4E4E4]"/> 
+                            <input value={lname} onChange={(e) => setLname(e.target.value)} type="text" placeholder="Lastname" className="py-2 px-5 rounded bg-[#E4E4E4]"/><br />
+                            <input value={email} onChange={(e) => setEmail(e.target.value)} type="text" placeholder="Email Address" className="mt-5 w-full py-2 px-5 rounded bg-[#E4E4E4]"/><br />
+                            <input value={phone} onChange={(e) => setPhone(e.target.value)} type="text" placeholder="Phone Number" className="mt-5 w-full py-2 px-5 rounded bg-[#E4E4E4]"/><br />
+                            <input value={message} onChange={(e) => setMessage(e.target.value)} type="text" placeholder="Message" className="mt-5 w-full pb-32 text-left py-2 px-5 rounded bg-[#E4E4E4]"/><br />
                             <div className="flex item-center justify-center">
-                                <button className="text-center font-bold bg-[#123E59] text-[#F6B51D] p-2 px-5 rounded mt-4">Submit</button>
+                                <button onClick={handleContact} className="text-center font-bold bg-[#123E59] text-[#F6B51D] p-2 px-5 rounded mt-4">Submit</button>
                             </div>
                             
                         </div>
