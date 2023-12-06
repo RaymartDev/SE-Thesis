@@ -179,7 +179,7 @@ const Profile = () => {
                         <button className="mt-2 underline font-bold text-sm text-[#123E59]  ">More</button>
                     </div>
                     <hr className="my-5 border-[1px] border-black"/>
-                <h1 className="px-5 py-2 text-3xl font-bold">Work History</h1>
+                <h1 className="px-5 py-2 text-3xl font-bold">Request History</h1>
                 <JobList 
                     title="Web Deisgn"
                     salary="1000"
@@ -194,43 +194,37 @@ const Profile = () => {
                     possimus aut suscipit quia est voluptates voluptate et placeat deserunt 
                     ut debitis totam id debitis sint. Id"
                 />
-                <hr className="mt-5 border-[1px] border-black"/>
-                <div className="px-5 py-5">
-                    <h1 className="font-bold text-3xl">Portfolio</h1>
-                    <div className="flex justify-between mt-5">
-                        <p className="flex text-center font-bold w-1/5"><FaGlobeAfrica size={20} className="mr-1"/>Project Title/Weblink</p>
-                        <p className="w-9/12">Lorem ipsum dolor sit amet. Aut galisum minus et 
+
+                <JobList 
+                    title="Web Deisgn"
+                    salary="1000"
+                    description="Lorem ipsum dolor sit amet. Aut galisum minus et 
                     fugit architecto rem corrupti nulla hic iusto iusto et expedita 
                     recusandae non blanditiis magnam et eveniet eveniet. Et dicta tempore 
                     ut dicta consequatur et illo quia. Rem placeat officia id rerum quas et 
                     placeat reiciendis cum velit dolor id maiores officia 
                     rem quidem voluptas est delectus eveniet? Qui reiciendis 
                     possimus aut suscipit quia est voluptates voluptate et placeat deserunt 
-                    ut debitis totam id debitis sint. Idrem quidem voluptas</p>
-                    </div>
-                <div className="mt-3 flex justify-between">
-                        <p className="flex font-bold w-1/5"><FaGlobeAfrica size={20} className="mr-1"/> Project Title/Weblink</p>
-                        <p className="w-9/12">Lorem ipsum dolor sit amet. Aut galisum minus et 
+                    ut debitis totam id debitis sint. Idrem quidem voluptas est delectus eveniet? Qui reiciendis 
+                    possimus aut suscipit quia est voluptates voluptate et placeat deserunt 
+                    ut debitis totam id debitis sint. Id"
+                />
+
+                <JobList 
+                    title="Web Deisgn"
+                    salary="1000"
+                    description="Lorem ipsum dolor sit amet. Aut galisum minus et 
                     fugit architecto rem corrupti nulla hic iusto iusto et expedita 
                     recusandae non blanditiis magnam et eveniet eveniet. Et dicta tempore 
                     ut dicta consequatur et illo quia. Rem placeat officia id rerum quas et 
                     placeat reiciendis cum velit dolor id maiores officia 
                     rem quidem voluptas est delectus eveniet? Qui reiciendis 
                     possimus aut suscipit quia est voluptates voluptate et placeat deserunt 
-                    ut debitis totam id debitis sint. Idrem quidem voluptas</p>
-                    </div>
-                <div className="mt-3 flex justify-between">
-                        <p className="flex font-bold w-1/5"><FaGithub size={20} className="mr-1"/>Github</p>
-                        <p className="w-9/12">Lorem ipsum dolor sit amet. Aut galisum minus et 
-                    fugit architecto rem corrupti nulla hic iusto iusto et expedita 
-                    recusandae non blanditiis magnam et eveniet eveniet. Et dicta tempore 
-                    ut dicta consequatur et illo quia. Rem placeat officia id rerum quas et 
-                    placeat reiciendis cum velit dolor id maiores officia 
-                    rem quidem voluptas est delectus eveniet? Qui reiciendis 
+                    ut debitis totam id debitis sint. Idrem quidem voluptas est delectus eveniet? Qui reiciendis 
                     possimus aut suscipit quia est voluptates voluptate et placeat deserunt 
-                    ut debitis totam id debitis sint. Idrem quidem voluptas</p>
-                    </div>
-                </div>
+                    ut debitis totam id debitis sint. Id"
+                />
+        
                 </div>
             </div>
             <Footer />
