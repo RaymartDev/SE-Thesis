@@ -7,6 +7,11 @@ import Spinner from './components/Spinner'
 const Landing = lazy(() => import("./Landing"))
 const Register = lazy(() => import("./views/Register"))
 const Login = lazy(() => import("./views/Login"))
+const EmployeeDashboard = lazy(() => import("./views/employee/Dashboard"))
+const ClientDashboard = lazy(() => import("./views/user/Dashboard"))
+const AddModal = lazy(() => import("./views/user/AddModal"))
+const JobDetailModal = lazy(() => import("./components/JobDetailModal"))
+const EmployeeProfile = lazy(() => import("./views/employee/Profile"))
 
 function App() {
   return (
@@ -18,6 +23,11 @@ function App() {
             <Route path="/" element={<Landing />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/employeedashboard" element={<EmployeeDashboard />} />
+            <Route path="/clientdashboard" element={<ClientDashboard />} />
+            <Route path="/addmodal" element={<AddModal />} />
+            <Route path="/jobdetailmodal" element={<JobDetailModal />} />
+            <Route path="/employeeprofile" element={<EmployeeProfile />} />
             <Route path="/loader" element={<Spinner />} />
           </Routes>
         </Suspense>
