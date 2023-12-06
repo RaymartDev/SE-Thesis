@@ -12,6 +12,7 @@ const ClientDashboard = lazy(() => import("./views/user/Dashboard"))
 const AddModal = lazy(() => import("./views/user/AddModal"))
 const JobDetailModal = lazy(() => import("./components/JobDetailModal"))
 const EmployeeProfile = lazy(() => import("./views/employee/Profile"))
+const ClientProfile = lazy(() => import("./views/user/Profile"))
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
             <Route path="/addmodal" element={<AddModal />} />
             <Route path="/jobdetailmodal" element={<JobDetailModal />} />
             <Route path="/employeeprofile" element={<EmployeeProfile />} />
+            <Route path="/clientprofile" element={<ClientProfile />} />
             <Route path="/loader" element={<Spinner />} />
           </Routes>
         </Suspense>
