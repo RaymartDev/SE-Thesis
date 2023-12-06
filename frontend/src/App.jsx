@@ -10,6 +10,7 @@ const Login = lazy(() => import("./views/Login"))
 const EmployeeDashboard = lazy(() => import("./views/employee/Dashboard"))
 const ClientDashboard = lazy(() => import("./views/user/Dashboard"))
 const AddModal = lazy(() => import("./views/user/AddModal"))
+const JobDetailModal = lazy(() => import("./components/JobDetailModal"))
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
             <Route path="/employeedashboard" element={<EmployeeDashboard />} />
             <Route path="/clientdashboard" element={<ClientDashboard />} />
             <Route path="/addmodal" element={<AddModal />} />
+            <Route path="/jobdetailmodal" element={<JobDetailModal />} />
             <Route path="/loader" element={<Spinner />} />
           </Routes>
         </Suspense>
