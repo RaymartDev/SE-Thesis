@@ -1,6 +1,18 @@
 import mongoose from 'mongoose'
 import bcrypt from 'bcryptjs'
 
+export class Education {
+    constructor(school, course, year) {
+      this.school = school;
+      this.course = course;
+      this.year = year;
+    }
+  
+    toString() {
+      return `${this.school}, ${this.course}, ${this.year}`;
+    }
+}
+
 const userSchema = mongoose.Schema({
     name: {
         type: String,
@@ -39,6 +51,63 @@ const userSchema = mongoose.Schema({
     password: {
         type: String,
         required: true
+    },
+    skills: {
+        type: [String],
+        required: false,
+        default: []
+    },
+    earnings: {
+        type: Number,
+        required: false,
+        default: 0
+    },
+    language: {
+        type: [String],
+        required: false,
+        default: []
+    },
+    education: {
+        type: [String],
+        required: false,
+        default: []
+    },
+    payment: {
+        type: [String],
+        required: false
+    },
+    jobs: {
+        type: [mongoose.Schema.Types.ObjectId],
+        ref: 'Job',
+        required: false
+    },
+    savedJobs: {
+        type: [mongoose.Schema.Types.ObjectId],
+        ref: 'Job',
+        required: false
+    },
+    website: {
+        type: String,
+        required: false,
+        default: ''
+    },
+    portfolio: {
+        type: String,
+        required: false,
+        default: ''
+    },
+    occupation: {
+        type: [String],
+        required: false,
+        default: []
+    },
+    projects: {
+        type: [String],
+        required: false,
+    },
+    github: {
+        type: String,
+        required: false
     }
 }, {
     timestamps: true

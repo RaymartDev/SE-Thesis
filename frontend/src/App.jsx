@@ -3,33 +3,29 @@ import { lazy, Suspense } from 'react'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import Spinner from './components/Spinner'
+import { useSelector } from 'react-redux'
 
 const Landing = lazy(() => import("./Landing"))
 const Register = lazy(() => import("./views/Register"))
 const Login = lazy(() => import("./views/Login"))
-const EmployeeDashboard = lazy(() => import("./views/employee/Dashboard"))
-const ClientDashboard = lazy(() => import("./views/user/Dashboard"))
-const AddModal = lazy(() => import("./views/user/AddModal"))
-const JobDetailModal = lazy(() => import("./components/JobDetailModal"))
-const EmployeeProfile = lazy(() => import("./views/employee/Profile"))
-const ClientProfile = lazy(() => import("./views/user/Profile"))
+const Dashboard = lazy(() => import("./views/Dashboard"))
+const Profile = lazy(() => import("./views/Profile"))
 
 function App() {
+
+  const { userInfo } = useSelector((state) => state.auth)
+
   return (
     <>
       <BrowserRouter>
         <Suspense fallback={<Spinner />}>
           <ToastContainer />
           <Routes>
-            <Route path="/" element={<Landing />} />
+            <Route path="/" element={<Landing info={userInfo} />}/>
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-            <Route path="/employeedashboard" element={<EmployeeDashboard />} />
-            <Route path="/clientdashboard" element={<ClientDashboard />} />
-            <Route path="/addmodal" element={<AddModal />} />
-            <Route path="/jobdetailmodal" element={<JobDetailModal />} />
-            <Route path="/employeeprofile" element={<EmployeeProfile />} />
-            <Route path="/clientprofile" element={<ClientProfile />} />
+            <Route path="/dashboard" element={<Dashboard info={userInfo} />} />
+            <Route path="/profile" element={<Profile info={userInfo} />} />
             <Route path="/loader" element={<Spinner />} />
           </Routes>
         </Suspense>
