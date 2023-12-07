@@ -5,8 +5,7 @@ import { CiSaveDown2 } from "react-icons/ci";
 const JobDetailModal = () => {
     return ( 
         <>
-            <div className="w-screen h-screen relative">
-                <div className="w-1/2 absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 rounded-3xl">
+                <div className="w-1/2 absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 rounded-3xl z-20">
                     <h1 className="mx-4 mt-2 font-bold text-4xl">Job Detail</h1>
                     <div className="flex m-4">
                         <div className="w-2/3">
@@ -81,7 +80,6 @@ const JobDetailModal = () => {
                         </div>
                     </div>
                 </div>
-            </div>
         </>
     );
 }

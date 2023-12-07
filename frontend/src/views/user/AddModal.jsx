@@ -3,10 +3,11 @@ import { useEffect, useState } from "react";
 import { useCreateJobMutation } from "../../slices/jobApiSlice";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
-import { addMyJob } from "../../slices/jobSlice";
+import { addMyJob, addJob } from "../../slices/jobSlice";
 import Spinner from "../../components/Spinner";
+import { IoCloseOutline } from "react-icons/io5";
 
-const AddModal = ({info}) => {
+const AddModal = ({info, setModal}) => {
     const [title, setTitle] = useState("")
     const [description, setDescription] = useState("")
     const [budget, setBudget] = useState(0)
@@ -49,6 +50,9 @@ const AddModal = ({info}) => {
             }).unwrap()
 
             dispatch(addMyJob(res));
+            dispatch(addJob(res))
+            setModal(false)
+            toast.success('You have created job successfully')
         }catch(err) {
             toast.error(err?.data?.message || err.error)
         }
@@ -60,7 +64,9 @@ const AddModal = ({info}) => {
         <>
             {isLoading && <Spinner />}
             <div className="bg-white z-40 w-1/2 h-3/5 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 px-10 py-10 rounded-3xl">
-                    <div className="flex justify-between">
+            
+                    <div className="flex justify-between relative">
+                    <IoCloseOutline size={30} className="absolute -right-8 -top-8 cursor-pointer" onClick={() => setModal(false)}/>
                         <h1 className="text-3xl font-bold">Add Job Request</h1>
                         <button onClick={handleSubmit} className="bg-[#123E59] rounded-full text-white px-5 py-[2px]">Publish Request</button>
                     </div>
