@@ -19,7 +19,7 @@ const jobSchema = mongoose.Schema({
         default: 0
     },
     expertise: {
-        type: [String], 
+        type: String, 
         required: false
     },
     skills: {
@@ -36,8 +36,9 @@ const jobSchema = mongoose.Schema({
         /**
          * Status
          * 1 - Active
-         * 2 - Cancelled
-         * 3 - Completed
+         * 2 - Client Done
+         * 3 - Employee Done
+         * 4 - Completed
          */
     },
     owner: {

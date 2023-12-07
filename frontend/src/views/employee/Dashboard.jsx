@@ -1,19 +1,53 @@
+/* eslint-disable react/prop-types */
 import DashNav from "../../components/DashNav";
-import Footer from "../../components/Footer";
 import { IoSearch } from "react-icons/io5";
-import JobList from "../../components/JobList";
 import Profile from "../../components/Profile";
 import { TbStatusChange } from "react-icons/tb";
+import { useState } from "react";
+import { lazy, Suspense } from 'react'
+import Spinner from "../../components/Spinner";
+
+const MyJobs = lazy(() => import("./MyJobs"))
+const AvailableJobs = lazy(() => import("./AvailableJobs"))
+const SavedJob = lazy(() => import("./SavedJob"))
+const CompletedJob = lazy(() => import("./CompletedJob"))
 
 
-const Dashboard = () => {
+const Dashboard = ({info}) => {
+    const [navPage, setNavPage] = useState(1)
+    const [search, setSearch] = useState("")
+    const [modalMode, setModalMode] = useState(false)
+    
+    const handleActiveBtn = (e) => {
+        e.preventDefault()
+        setNavPage(1)
+    }
+
+    const handleJobsBtn = (e) => {
+        e.preventDefault()
+        setNavPage(2)
+    }
+
+    const handleSaveBtn = (e) => {
+        e.preventDefault()
+        setNavPage(3)
+    }
+
+    const handleCompleteBtn = (e) => {
+        e.preventDefault()
+        setNavPage(4)
+    }
+
+    const activeClass = "font-bold border-black border-[1px] rounded-full px-3 py-1 text-white bg-[#123E59] mr-4"
+    const inactiveClass = "font-bold border-black border-[1px] rounded-full px-3 py-1 text-[#123E59] bg-white mr-4"
+
     return ( 
         <>
         <DashNav />
             <div className="container flex mx-auto justify-between mt-14">
                 <div className="w-3/4">
                     <div className=" border-black rounded-full border-[1px] relative">
-                        <input type="text" placeholder="Search" className="w-full px-10 py-2 rounded-full text-black" />
+                        <input value={search} onChange={(e) => setSearch(e.target.value)} type="text" placeholder="Search" className="w-full px-10 py-2 rounded-full text-black" />
                         <IoSearch size={20} className="absolute translate-x-4 top-1/2 -translate-y-1/2"/>
                     </div>
                     
@@ -26,96 +60,30 @@ const Dashboard = () => {
                         </div>
                         <hr className="bg-black h-[2px]"/>
                         <div className="flex px-6 my-4"  >
-                            <button className="text-[#123E59] font-bold border-black border-[1px] rounded-full px-3 py-1 hover:text-[#FFFFFF] hover:bg-[#123E59] default:bg-[#123E59] active:bg-[#123E59] mr-4">Active Jobs</button>
-                            <button className="text-[#123E59] font-bold border-black border-[1px] rounded-full px-3 py-1 hover:text-[#FFFFFF] hover:bg-[#123E59] active:bg-[#123E59] mr-4">My Jobs</button>
-                            <button className="text-[#123E59] font-bold border-black border-[1px] rounded-full px-3 py-1 hover:text-[#FFFFFF] hover:bg-[#123E59] active:bg-[#123E59] mr-4">Saved Jobs</button>
-                            <button className="text-[#123E59] font-bold border-black border-[1px] rounded-full px-3 py-1 hover:text-[#FFFFFF] hover:bg-[#123E59] active:bg-[#123E59] mr-4">Completed Jobs</button>
-                            <button className="text-[#123E59] font-bold border-black border-[1px] rounded-full px-3 py-1 hover:text-[#FFFFFF] hover:bg-[#123E59] active:bg-[#123E59] mr-4">Job History</button>
+                            <button onClick={handleActiveBtn} className={navPage === 1 ? activeClass : inactiveClass}>Active Jobs</button>
+                            <button onClick={handleJobsBtn} className={navPage === 2 ? activeClass : inactiveClass}>My Jobs</button>
+                            <button onClick={handleSaveBtn} className={navPage === 3 ? activeClass : inactiveClass}>Saved Jobs</button>
+                            <button onClick={handleCompleteBtn} className={navPage === 4 ? activeClass : inactiveClass}>Completed Jobs</button>
                         </div>
                         <hr className="bg-black h-[2px]"/>
-                        <JobList 
-                            title="Video Editing"
-                            salary="120"
-                            description="Lorem ipsum dolor sit amet. Sed natus consequatur est 
-                            nesciunt facilis non accusantium natus eos quia exercitationem. Et 
-                            totam voluptates et exercitationem velit id sunt dolores id sint incidunt 
-                            et quas dolor. Non repudiandae repellendus quo voluptas ipsa in voluptatem 
-                            laboriosam aut nihil reiciendis aut amet delectus non neque vero. 
-                            In cupiditate totam est dolores corporis ut quia explicabo cum tenetur 
-                            debitis qui saepe voluptatem. Rem blanditiis voluptatem est dolores nobis et 
-                            harum delectus est dolore dolorem nam repellendus facere ad galisum vitae ut 
-                            numquam quis! Rem optio ipsum eum enim commodi et velit similique.t"
-                        />
-                        <JobList 
-                            title="Graphic Design"
-                            salary="140"
-                            description="Lorem ipsum dolor sit amet. Sed natus consequatur est 
-                            nesciunt facilis non accusantium natus eos quia exercitationem. Et 
-                            totam voluptates et exercitationem velit id sunt dolores id sint incidunt 
-                            et quas dolor. Non repudiandae repellendus quo voluptas ipsa in voluptatem 
-                            laboriosam aut nihil reiciendis aut amet delectus non neque vero. 
-                            In cupiditate totam est dolores corporis ut quia explicabo cum tenetur 
-                            debitis qui saepe voluptatem. Rem blanditiis voluptatem est dolores nobis et 
-                            harum delectus est dolore dolorem nam repellendus facere ad galisum vitae ut 
-                            numquam quis! Rem optio ipsum eum enim commodi et velit similique.t"
-                        />
-                        <JobList 
-                            title="Graphic Design"
-                            salary="140"
-                            description="Lorem ipsum dolor sit amet. Sed natus consequatur est 
-                            nesciunt facilis non accusantium natus eos quia exercitationem. Et 
-                            totam voluptates et exercitationem velit id sunt dolores id sint incidunt 
-                            et quas dolor. Non repudiandae repellendus quo voluptas ipsa in voluptatem 
-                            laboriosam aut nihil reiciendis aut amet delectus non neque vero. 
-                            In cupiditate totam est dolores corporis ut quia explicabo cum tenetur 
-                            debitis qui saepe voluptatem. Rem blanditiis voluptatem est dolores nobis et 
-                            harum delectus est dolore dolorem nam repellendus facere ad galisum vitae ut 
-                            numquam quis! Rem optio ipsum eum enim commodi et velit similique.t"
-                        />
-                        <JobList 
-                            title="Graphic Design"
-                            salary="140"
-                            description="Lorem ipsum dolor sit amet. Sed natus consequatur est 
-                            nesciunt facilis non accusantium natus eos quia exercitationem. Et 
-                            totam voluptates et exercitationem velit id sunt dolores id sint incidunt 
-                            et quas dolor. Non repudiandae repellendus quo voluptas ipsa in voluptatem 
-                            laboriosam aut nihil reiciendis aut amet delectus non neque vero. 
-                            In cupiditate totam est dolores corporis ut quia explicabo cum tenetur 
-                            debitis qui saepe voluptatem. Rem blanditiis voluptatem est dolores nobis et 
-                            harum delectus est dolore dolorem nam repellendus facere ad galisum vitae ut 
-                            numquam quis! Rem optio ipsum eum enim commodi et velit similique.t"
-                        />
-                        <JobList 
-                            title="Graphic Design"
-                            salary="140"
-                            description="Lorem ipsum dolor sit amet. Sed natus consequatur est 
-                            nesciunt facilis non accusantium natus eos quia exercitationem. Et 
-                            totam voluptates et exercitationem velit id sunt dolores id sint incidunt 
-                            et quas dolor. Non repudiandae repellendus quo voluptas ipsa in voluptatem 
-                            laboriosam aut nihil reiciendis aut amet delectus non neque vero. 
-                            In cupiditate totam est dolores corporis ut quia explicabo cum tenetur 
-                            debitis qui saepe voluptatem. Rem blanditiis voluptatem est dolores nobis et 
-                            harum delectus est dolore dolorem nam repellendus facere ad galisum vitae ut 
-                            numquam quis! Rem optio ipsum eum enim commodi et velit similique.t"
-                        />
-                        <hr className="bg-black h-[2px]"/>
-                        <div className="text-center py-4">
-                            <button className="text-center text-sm py-1 px-5 text-blue-300 border-[1px] rounded-full">
-                                See More
-                            </button>
-                        </div>
-                        
-                        
+                        <Suspense fallback={<Spinner/>}>
+                            {navPage === 1 && <AvailableJobs modalMode={modalMode} query={search} />}
+                            {navPage === 2 && <MyJobs modalMode={modalMode} query={search} />}
+                            {navPage === 3 && <SavedJob modalMode={modalMode} query={search} />}
+                            {navPage === 4 && <CompletedJob modalMode={modalMode} query={search} />}
+                        </Suspense>
                     </div> 
                     
                 </div>
 
                 <div className="w-1/5 flex flex-col items-center border-[1px] h-72 border-black rounded-xl">
-                    <Profile />
+                    <Profile
+                        name={info.name}
+                        website={info.website}
+                        portfolio={info.portfolio} />
                 </div>
                 
             </div>
-            <Footer />
         </>
     );
 }

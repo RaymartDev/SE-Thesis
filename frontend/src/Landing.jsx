@@ -16,9 +16,9 @@ import pm from "./img/pm.jpg"
 import pm2 from "./img/pm2.jpg"
 import pm3 from "./img/pm3.jpg"
 import { useNavigate } from "react-router-dom"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
-const Landing = () => {
+const Landing = ({info}) => {
 
     const [fname, setFname] = useState("")
     const [lname, setLname] = useState("")
@@ -35,6 +35,12 @@ const Landing = () => {
         e.preventDefault()
         navigate("/register")
     }
+
+    useEffect(() => {
+        if(info) {
+            navigate('/dashboard')
+        }
+    }, [navigate,info])
 
     return (
         <>

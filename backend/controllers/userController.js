@@ -30,7 +30,7 @@ const registerUser = asyncHandler(async (req, res) => {
         birthDate,
         contact,
         gender,
-        role
+        role,
     })
 
     if(user) {
@@ -53,27 +53,32 @@ const registerUser = asyncHandler(async (req, res) => {
 })
 
 const loginUser = asyncHandler(async (req, res) => {
-    const { username, password } = req.body
+    const { username, password, role } = req.body
+
+    if (!username) {
+        res.status(400)
+        throw new Error('Insert Username')
+    }
+
+    if (!password) {
+        res.status(400)
+        throw new Error('Insert Password')
+    }
 
     let user;
     if (validator.isEmail(username)) {
-      user = await User.findOne({ email: username });
+      user = await User.findOne({ email: username, role });
     } else {
-      user = await User.findOne({ username: username.toLowerCase() });
+      user = await User.findOne({ username: username.toLowerCase(), role });
     }
     if(user && (await user.matchPasswords(password))) {
         generateToken(res, user._id)
-        res.status(201).json({
-            _id: user._id,
-            name: user.name,
-            email: user.email,
-            username: user.username,
-            address: user.address,
-            birthDate: user.birthDate,
-            contact: user.contact,
-            gender: user.gender,
-            role: user.role,
-        })
+        if(validator.isEmail(username)) {
+            user = await User.findOne({ email: username, role }).select('-password');
+        } else {
+            user = await User.findOne({ username: username.toLowerCase(), role }).select('-password');
+        }
+        res.status(201).json(user)
     } else {
         res.status(401)
         throw new Error('Invalid credentials')
@@ -109,14 +114,39 @@ const updateProfile = asyncHandler(async (req, res) => {
                 user.email = updatedEmail
             }
         }
-
-        user.password = req.body.password || user.password
-        user.address = req.body.address || user.address
-        user.contact = req.body.contact || user.contact
-        user.birthDate = req.body.birthDate || user.birthDate
-        user.language = req.body.language ? req.body.language.split(';') : user.language
-        user.skills = req.body.skills ? req.body.skills.split(';') : user.skills
-        user.payment = req.body.payment ? req.body.payment.split(';') : user.payment
+        if(req.body.password) {
+            user.password = req.body.password
+        }
+        if(req.body.address) {
+            user.address = req.body.address
+        }
+        if(req.body.contact) {
+            user.contact = req.body.contact
+        }
+        if(req.body.birthDate) {
+            user.birthDate = req.body.birthDate
+        }
+        if(req.body.language) {
+            if(req.body.language.includes(';')) {
+                user.language = req.body.language.split(';')
+            } else {
+                user.language = [req.body.language]
+            }
+        }
+        if(req.body.skills) {
+            if(req.body.skills.includes(';')) {
+                user.skills = req.body.skills.split(';')
+            } else {
+                user.skills = [req.body.skills]
+            }
+        }
+        if(req.body.payment) {
+            if(req.body.payment.includes(';')) {
+                user.payment = req.body.payment.split(';')
+            } else {
+                user.payment = [req.body.payment]
+            }
+        }
 
         if(req.body.education) {
             const education = [];
@@ -170,6 +200,75 @@ const getJob = asyncHandler(async (req, res) => {
     });
 });
 
+const getAllJobs = asyncHandler(async (req, res) => {
+    const user = await User.findById(req.user._id).populate('jobs');
+
+    if (!user) {
+        res.status(404);
+        throw new Error('User not found');
+    }
+
+    const { jobs } = user;
+
+    res.json(jobs);
+});
+
+const getSavedJobs = asyncHandler(async (req, res) => {
+    const user = await User.findById(req.user._id).populate('savedJobs').select('-password');
+
+    if (!user) {
+        res.status(404);
+        throw new Error('User not found');
+    }
+
+    const { jobs } = user.savedJobs;
+
+    res.json(jobs);
+});
+
+const getCompletedJobs = asyncHandler(async (req, res) => {
+    const user = await User.findById(req.user._id).select('-password');
+
+    if (!user) {
+        res.status(404);
+        throw new Error('User not found');
+    }
+
+    const { jobs } = await Job.find({owner: user._id, status: 4})
+    res.json(jobs);
+})
+
+const getAllAvailableJobs = asyncHandler(async (req, res) => {
+    const jobs = await Job.find({})
+    res.json(jobs);
+});
+
+const getAvailableJobs = asyncHandler(async (req,res) => {
+    const jobs = await Job.find({})
+    let page = parseInt(req.params.page) || 1; // Parse the page parameter as an integer
+    const pageSize = 3;
+
+    const maxPage = Math.ceil(jobs.length / pageSize);
+
+    if (page < 1) {
+        page = 1
+    }
+    if (page > maxPage) {
+        page = maxPage
+    }
+
+    const startIndex = (page - 1) * pageSize;
+    const endIndex = startIndex + pageSize;
+
+    const limitedJobs = jobs.slice(startIndex, endIndex);
+
+    res.json({
+        jobs: limitedJobs,
+        currentPage: page,
+        totalPages: maxPage,
+    });
+})
+
 const isImage = file => {
     const allowedExtensions = ['.jpg', '.jpeg', '.png', '.gif'];
     const fileExtension = path.extname(file.originalname).toLowerCase();
@@ -219,15 +318,33 @@ const createJob = asyncHandler(async (req, res) => {
             throw new Error('Error uploading attachments');
         }
 
-        const attachments = req.files.map(file => file.path);
+        let attachments = [""]
+        if(req.files) {
+            req.files.forEach((file) => attachments.push(file.path))
+        }
+
+        let skills = []
+        if(req.body.skills) {
+            if(req.body.skills.includes(';')) {
+                skills = req.body.skills.split(';')
+            } else {
+                skills = [req.body.skills]
+            }
+        }
+
+        if(!req.body.expertise) {
+            res.status(400)
+            throw new Error('Must choose at least one expertise')
+        }
+        
 
         const job = await Job.create({
             title,
             description,
             estimatedBudget,
             rate: req.body.rate ? req.body.rate : 0,
-            expertise: req.body.expertise ? req.body.expertise.split(';') : [],
-            skills: req.body.skills ? req.body.skills.split(';') : [],
+            expertise: req.body.expertise,
+            skills,
             attachments,
             status: 1,
             owner: user._id,
@@ -295,13 +412,23 @@ const searchJob = asyncHandler(async (req, res) => {
 })
 
 export {
+    // AUTH
     registerUser,
     loginUser,
     logoutUser,
+
+    // PROFILE
     getUserProfile,
     updateProfile,
+
+    // JOBS / REQUEST
     getJob,
     createJob,
     saveJob,
-    searchJob
+    searchJob,
+    getAvailableJobs,
+    getAllAvailableJobs,
+    getAllJobs,
+    getSavedJobs,
+    getCompletedJobs
 }

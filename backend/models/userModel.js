@@ -85,6 +85,29 @@ const userSchema = mongoose.Schema({
         type: [mongoose.Schema.Types.ObjectId],
         ref: 'Job',
         required: false
+    },
+    website: {
+        type: String,
+        required: false,
+        default: ''
+    },
+    portfolio: {
+        type: String,
+        required: false,
+        default: ''
+    },
+    occupation: {
+        type: [String],
+        required: false,
+        default: []
+    },
+    projects: {
+        type: [String],
+        required: false,
+    },
+    github: {
+        type: String,
+        required: false
     }
 }, {
     timestamps: true
