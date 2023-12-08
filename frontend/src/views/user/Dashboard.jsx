@@ -37,8 +37,8 @@ const Dashboard = ({info}) => {
     const activeClass = modalMode ? `${modalClass} font-bold border-black border-[1px] rounded-full px-3 py-1 text-white bg-[#123E59] mr-4` : 'font-bold border-black border-[1px] rounded-full px-3 py-1 text-white bg-[#123E59] mr-4'
     const inactiveClass = modalMode ? `${modalClass} font-bold border-black border-[1px] rounded-full px-3 py-1 text-[#123E59] bg-white mr-4` : 'font-bold border-black border-[1px] rounded-full px-3 py-1 text-[#123E59] bg-white mr-4'
     return ( 
-        <div className={modalMode ? `${modalClass} h-screen` : 'h-screen'}>
-            {modalMode && <AddModal info={info} />}
+        <div className={modalMode ? `${modalClass} h-full w-screen z-10` : 'h-screen'}>
+            {modalMode && <AddModal info={info} setModal={setModalMode} />}
             <DashNav />
             <div className="container flex mx-auto justify-between mt-14">
                 <div className="w-3/4">

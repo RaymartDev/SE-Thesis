@@ -85,7 +85,7 @@ const MyJobs = ({modalMode, query}) => {
                 salary={-1}
                 description="There are no data available yet"
                 rate={0}
-                expertise={[]}
+                expertise={''}
                 modalMode={modalMode}
             />
         );

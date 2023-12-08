@@ -2,11 +2,16 @@
 import Oval from './Oval'
 
 const JobList = (props) => {
+
+    const handleClick = () => {
+        console.log(props.id)
+    }
+
     return ( 
         <>
             <div className="px-6 py-8">
                 <div>
-                    <h1 className="cursor-pointer text-2xl overflow-hidden max-h-8 text-[#123E59]">{props.title}</h1>
+                    <h1 className="cursor-pointer text-2xl overflow-hidden max-h-8 text-[#123E59]" onClick={handleClick}>{props.title}</h1>
                     {props.salary >= 0 && <p className="font-bold mt-3">Estimated. Budget ₱{props.salary}</p>}
                     {props.rate > 0 && <p className="font-bold mt-3">Hourly Rate ₱{props.rate}</p>}
                     <div className="overflow-hidden max-h-28">

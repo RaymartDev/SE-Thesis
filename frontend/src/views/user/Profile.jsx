@@ -40,7 +40,7 @@ const Profile = ({info}) => {
                                 <p className="text-sm">Total Spend</p>
                             </div>
                             <div className="">
-                                <p className="text-3xl font-bold">{info.jobs.length}</p>
+                                <p className="text-3xl font-bold">{info.jobs ? info.jobs.length : 0}</p>
                                 <p className="text-sm">Total Request</p>
                             </div>
                         </div>

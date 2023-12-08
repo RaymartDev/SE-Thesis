@@ -1,18 +1,26 @@
 /* eslint-disable react/prop-types */
 
 import JobList from "../../components/JobList";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { toast } from 'react-toastify'
 import { useSelector, useDispatch } from "react-redux";
 import { setJob } from '../../slices/jobSlice'
 import { useAvailableJobsQuery } from "../../slices/jobApiSlice";
 import Spinner from "../../components/Spinner";
+import JobDetailModal from '../../components/JobDetailModal'
 
 const AvailableJobs = ({modalMode, query}) => {
     const { data,error, isLoading } = useAvailableJobsQuery();
 
     const dispatch = useDispatch()
     const { jobsInfo } = useSelector((state) => state.jobs)
+    const [viewMode, setViewMode] = useState(true)
+    const [editMode, setEditMode] = useState(false)
+    const [applyMode, setApplyMode] = useState(false)
+
+    const modalClass = "bg-black bg-opacity-50"
+
+
     useEffect(() => {
         dispatch(setJob(data))
     }, [dispatch,data])
@@ -42,7 +50,7 @@ const AvailableJobs = ({modalMode, query}) => {
 
     if (jobsInfo && jobsInfo.length > 0 && query) {
         return (
-            <>
+            <> 
                 {jobsInfo
                     .filter((job) => job.title.toLowerCase().includes(query.toLowerCase()))
                     .map((job) =>  (
@@ -64,6 +72,7 @@ const AvailableJobs = ({modalMode, query}) => {
     if (jobsInfo && jobsInfo.length > 0 && !query) {
         return (
             <>
+            <div>
                 {jobsInfo.map((job) => (
                     <JobList
                         key={job._id}
@@ -73,8 +82,10 @@ const AvailableJobs = ({modalMode, query}) => {
                         rate={job.rate}
                         expertise={job.expertise}
                         modalMode={modalMode}
+                        id={job._id}
                     />
                 ))}
+            </div>
             </>
         );
     } else {
