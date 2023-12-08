@@ -8,7 +8,7 @@ import { setMyJob } from '../../slices/jobSlice'
 import { useListJobsQuery } from "../../slices/jobApiSlice";
 import Spinner from "../../components/Spinner";
 
-const MyJobs = ({modalMode, query}) => {
+const MyJobs = ({query}) => {
     const { data,error, isLoading } = useListJobsQuery();
 
     const dispatch = useDispatch()
@@ -44,7 +44,7 @@ const MyJobs = ({modalMode, query}) => {
         return (
             <>
                 {myJobs
-                    .filter((job) => job.title.toLowerCase().includes(query.toLowerCase()))
+                    .filter((job) => job.title.toLowerCase().includes(query.toLowerCase()) || job.description.toLowerCase().includes(query.toLowerCase()))
                     .map((job) =>  (
                         <JobList
                             key={job._id}
@@ -53,7 +53,7 @@ const MyJobs = ({modalMode, query}) => {
                             description={job.description}
                             rate={job.rate}
                             expertise={job.expertise}
-                            modalMode={modalMode}
+                            id={job._id}
                         />
                     ))
                 }
@@ -72,7 +72,7 @@ const MyJobs = ({modalMode, query}) => {
                         description={job.description}
                         rate={job.rate}
                         expertise={job.expertise}
-                        modalMode={modalMode}
+                        id={job._id}
                     />
                 ))}
             </>
@@ -83,10 +83,9 @@ const MyJobs = ({modalMode, query}) => {
                 key={1}
                 title="No data Available"
                 salary={-1}
-                description="There are no data available yet"
+                description="You have no request available yet"
                 rate={0}
                 expertise={''}
-                modalMode={modalMode}
             />
         );
     }

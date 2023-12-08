@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
@@ -25,10 +26,22 @@ const jobSlice = createSlice({
         },
         addMyJob: (state, action) => {
             state.myJobs.push(action.payload)
-        }
+        },
+        updateJob: (state, action) => {
+            for(let i = 0; i < state.jobsInfo.length; i++) {
+                if(String(state.jobsInfo[i]._id ) === String(action.payload._id)) {
+                    state.jobsInfo[i] = action.payload
+                    break
+                }
+                if(String(state.myJobs[i]._id) === String(action.payload._id)) {
+                    state.myJobs[i] = action.payload
+                    break
+                }
+            }
+        },
     }
 })
 
-export const { addJob ,setJob, clearJob, setMyJob, addMyJob } = jobSlice.actions
+export const { addJob ,setJob, clearJob, setMyJob, addMyJob, updateJob } = jobSlice.actions
 
 export default jobSlice.reducer

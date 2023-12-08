@@ -17,14 +17,17 @@ import pm2 from "./img/pm2.jpg"
 import pm3 from "./img/pm3.jpg"
 import { useNavigate } from "react-router-dom"
 import { useState, useEffect } from "react"
+import { useSelector } from "react-redux"
 
-const Landing = ({info}) => {
+const Landing = () => {
 
     const [fname, setFname] = useState("")
     const [lname, setLname] = useState("")
     const [email, setEmail] = useState("")
     const [phone, setPhone] = useState("")
     const [message, setMessage] = useState("")
+
+    const { userInfo } = useSelector((state) => state.auth)
 
     const handleContact = (e) => {
         e.preventDefault()
@@ -37,10 +40,10 @@ const Landing = ({info}) => {
     }
 
     useEffect(() => {
-        if(info) {
+        if(userInfo) {
             navigate('/dashboard')
         }
-    }, [navigate,info])
+    }, [navigate,userInfo])
 
     return (
         <>

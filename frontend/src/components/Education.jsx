@@ -1,5 +1,4 @@
 /* eslint-disable react/prop-types */
-import { BiSolidMessageSquareEdit } from "react-icons/bi";
 
 const Education = (props) => {
     return (
@@ -9,7 +8,6 @@ const Education = (props) => {
                 <p className="font-bold text-sm">{props.school}</p>
                 <p className=" text-sm">{props.course} ({props.year})</p>
             </div>
-            <BiSolidMessageSquareEdit size={20} className="hover:scale-110 cursor-pointer"/>
         </div>
         </>
     )

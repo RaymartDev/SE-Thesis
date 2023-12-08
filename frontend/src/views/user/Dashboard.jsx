@@ -32,22 +32,20 @@ const Dashboard = ({info}) => {
         setNavPage(3)
     }
 
-    const modalClass = "bg-black bg-opacity-50"
-
-    const activeClass = modalMode ? `${modalClass} font-bold border-black border-[1px] rounded-full px-3 py-1 text-white bg-[#123E59] mr-4` : 'font-bold border-black border-[1px] rounded-full px-3 py-1 text-white bg-[#123E59] mr-4'
-    const inactiveClass = modalMode ? `${modalClass} font-bold border-black border-[1px] rounded-full px-3 py-1 text-[#123E59] bg-white mr-4` : 'font-bold border-black border-[1px] rounded-full px-3 py-1 text-[#123E59] bg-white mr-4'
+    const activeClass = 'font-bold border-black border-[1px] rounded-full px-3 py-1 text-white bg-[#123E59] mr-4'
+    const inactiveClass = 'font-bold border-black border-[1px] rounded-full px-3 py-1 text-[#123E59] bg-white mr-4'
     return ( 
-        <div className={modalMode ? `${modalClass} h-full w-screen z-10` : 'h-screen'}>
+        <div className='h-screen'>
             {modalMode && <AddModal info={info} setModal={setModalMode} />}
             <DashNav />
             <div className="container flex mx-auto justify-between mt-14">
                 <div className="w-3/4">
                     <div className="flex justify-between">
                         <div className="border-black rounded-full border-[1px] relative w-3/4">
-                            <input value={search} onChange={(e) => setSearch(e.target.value)} disabled={modalMode} type="text" placeholder="Search" className={modalMode ? `${modalClass} w-full px-10 py-2 rounded-full text-black` : 'w-full px-10 py-2 rounded-full text-black'} />
+                            <input value={search} onChange={(e) => setSearch(e.target.value)} disabled={modalMode} type="text" placeholder="Search" className='w-full px-10 py-2 rounded-full text-black' />
                             <IoSearch size={20} className="absolute translate-x-4 top-1/2 -translate-y-1/2"/>
                         </div>
-                        <button onClick={() => setModalMode(true)} disabled={modalMode} className={modalMode ? `${modalClass} bg-[#123E59] rounded-full w-1/5 text-white relative flex justify-center items-center` : 'bg-[#123E59] rounded-full w-1/5 text-white relative flex justify-center items-center'}>
+                        <button onClick={() => setModalMode(true)} disabled={modalMode} className='bg-[#123E59] rounded-full w-1/5 text-white relative flex justify-center items-center'>
                             Add Job Request<AiFillPlusSquare size={20} className="ml-3" />
                         </button>
                     </div>
@@ -68,8 +66,8 @@ const Dashboard = ({info}) => {
                         </div>
                         <hr className="bg-black h-[2px]"/>
                         <Suspense fallback={<Spinner/>}>
-                            {navPage === 1 && <AvailableJobs modalMode={modalMode} query={search} />}
-                            {navPage === 2 && <MyJobs modalMode={modalMode} query={search} />}
+                            {navPage === 1 && <AvailableJobs query={search} />}
+                            {navPage === 2 && <MyJobs query={search} />}
                             {navPage === 3 && <CompletedJob modalMode={modalMode} query={search} />}
                         </Suspense>
                         

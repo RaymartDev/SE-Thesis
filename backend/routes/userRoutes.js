@@ -14,7 +14,8 @@ import {
     getAllAvailableJobs,
     getAllJobs,
     getSavedJobs,
-    getCompletedJobs
+    getCompletedJobs,
+    updateJob
 } from '../controllers/userController.js'
 import { protect } from '../middleware/authMiddleware.js'
 
@@ -33,6 +34,7 @@ router.get('/jobs', protect, searchJob)
 router.post('/jobs/create', protect , createJob)
 router.post('/jobs/save', protect, saveJob)
 router.get('/jobs/all', protect, getAllAvailableJobs)
+router.put('/jobs/update', protect, updateJob)
 
 // own methods
 router.get('/jobs/own/save', protect, getSavedJobs)

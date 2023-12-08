@@ -167,6 +167,38 @@ const updateProfile = asyncHandler(async (req, res) => {
     }
 })
 
+const updateJob = asyncHandler(async(req, res) => {
+    const job = await Job.findById(req.body._id).populate({
+        path: 'owner',
+        select: '-password'
+    })
+    const { title, description, estimatedBudget, rate, expertise } = req.body
+
+    if(!job) {
+        res.status(404)
+        throw new Error('Job not found')
+    }
+
+    if(title) {
+        job.title = title
+    }
+    if(description) {
+        job.description = description
+    }
+    if(estimatedBudget) {
+        job.estimatedBudget = estimatedBudget
+    }
+    if(rate) {
+        job.rate = rate
+    }
+    if(expertise) {
+        job.expertise
+    }
+
+    const updatedJob = await job.save()
+    res.json(updatedJob)
+})
+
 const getJob = asyncHandler(async (req, res) => {
     const user = await User.findById(req.user._id).populate('jobs');
 
@@ -200,6 +232,7 @@ const getJob = asyncHandler(async (req, res) => {
     });
 });
 
+// get all own jobs
 const getAllJobs = asyncHandler(async (req, res) => {
     const user = await User.findById(req.user._id).populate('jobs');
 
@@ -239,7 +272,7 @@ const getCompletedJobs = asyncHandler(async (req, res) => {
 })
 
 const getAllAvailableJobs = asyncHandler(async (req, res) => {
-    const jobs = await Job.find({})
+    const jobs = await Job.find({}).populate({path: 'owner', select: '-password'})
     res.json(jobs);
 });
 
@@ -430,5 +463,6 @@ export {
     getAllAvailableJobs,
     getAllJobs,
     getSavedJobs,
-    getCompletedJobs
+    getCompletedJobs,
+    updateJob
 }

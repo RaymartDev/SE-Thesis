@@ -1,8 +1,11 @@
-const EditModal = () => {
+import { IoCloseOutline } from "react-icons/io5";
+
+const EditModal = (setModal) => {
     return ( 
         <>
-            <div className="w-screen h-screen relative bg-transparent">
-                <div className="w-1/2 h-3/5 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 px-10 py-10 rounded-3xl">
+            <div className="w-screen h-screen relative bg-black bg-opacity-50">
+                <div className="w-1/2 h-3/5 bg-white absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 px-10 py-10 rounded-3xl">
+                <IoCloseOutline size={30} className="absolute right-1 top-1 cursor-pointer" onClick={() => setModal(false)}/>
                     <div className="flex justify-between">
                         <h1 className="text-3xl font-bold">Edit Job Request</h1>
                         <button className="bg-[#123E59] rounded-full text-white px-5 py-[2px]">Save Request</button>

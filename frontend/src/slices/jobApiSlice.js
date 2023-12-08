@@ -34,13 +34,15 @@ export const usersJobApiSlice = apiSlice.injectEndpoints({
                 body: data  
             })
         }),
-        searchJob: builder.query({
-            query: (query) => ({
-                url: `${JOBS_URL}/jobs?query=${query}`
+        updateJob: builder.mutation({
+            query: (data) => ({
+                url: `${JOBS_URL}/update`,
+                method: 'PUT',
+                body: data
             })
         })
     })
 })
 
 
-export const { useListJobsQuery, useAvailableJobsQuery, useSaveJobQuery, useCompleteJobQuery, useCreateJobMutation, useSearchJobQuery } = usersJobApiSlice;
+export const { useListJobsQuery, useAvailableJobsQuery, useSaveJobQuery, useCompleteJobQuery, useCreateJobMutation, useUpdateJobMutation } = usersJobApiSlice;

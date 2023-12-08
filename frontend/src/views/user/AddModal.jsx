@@ -61,9 +61,9 @@ const AddModal = ({info, setModal}) => {
 
 
     return ( 
-        <>
+        <div className="absolute overflow-auto bg-black bg-opacity-50 top-0 left-0 h-full z-10 w-full">
             {isLoading && <Spinner />}
-            <div className="bg-white z-40 w-1/2 h-3/5 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 px-10 py-10 rounded-3xl">
+            <div className="bg-white z-40 w-1/2 h-2/4 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 px-10 py-10 rounded-3xl">
             
                     <div className="flex justify-between relative">
                     <IoCloseOutline size={30} className="absolute -right-8 -top-8 cursor-pointer" onClick={() => setModal(false)}/>
@@ -73,29 +73,29 @@ const AddModal = ({info, setModal}) => {
                     <div >
                         <div className="flex flex-col mt-2">
                             <label htmlFor="title">Request Title</label>
-                            <input value={title} onChange={(e) => setTitle(e.target.value)} type="text" name="title" placeholder="Title" className="mt-1 px-3 border-[1px] border-black rounded-full"/>
+                            <input value={title} onChange={(e) => setTitle(e.target.value)} type="text" name="title" placeholder="Title" className="mt-1 h-10 px-3 border-[1px] border-black rounded-full"/>
                         </div>
                         
                         <div className="flex flex-col mt-3">
-                            <label htmlFor="description">Brief Description</label>
-                            <textarea value={description} onChange={(e) => setDescription(e.target.value)} name="title" placeholder="Description" className="flex flex-wrap mt-1 px-3 pb-20 border-[1px] h-32 border-black rounded-2xl overflow-y-scroll" />
+                            <label htmlFor="description">Description</label>
+                            <textarea value={description} onChange={(e) => setDescription(e.target.value)} name="title" placeholder="Description" className="flex pt-2 flex-wrap mt-1 px-3 pb-20 border-[1px] h-48 border-black rounded-2xl overflow-y-scroll no-scrollbar" />
                         </div>
                         
                     </div>
                     <div className="flex justify-between mt-3">
                         <div className="flex flex-col">
                             <label htmlFor="budget">Estimated Budget</label>
-                            <input type="number" value={budget} onChange={(e) => setBudget(e.target.value)} placeholder="0.00" className="mt-1 px-3 border-[1px] border-black rounded-full"/>
+                            <input type="number" value={budget} onChange={(e) => setBudget(e.target.value)} placeholder="0.00" className="h-10 mt-1 px-3 border-[1px] border-black rounded-full"/>
                         </div>
                         
                         <div className="flex flex-col">
                             <label htmlFor="price">Price Rate</label>
-                            <input type="number" value={rate} onChange={(e) => setRate(e.target.value)} placeholder="0.00" className="mt-1 px-3 border-[1px] border-black rounded-full"/>
+                            <input type="number" value={rate} onChange={(e) => setRate(e.target.value)} placeholder="0.00" className="h-10 mt-1 px-3 border-[1px] border-black rounded-full"/>
                         </div>
 
                         <div className="flex flex-col">
                             <label htmlFor="expertise">Expertise</label>
-                            <select value={expertise} onChange={(e) => setExpertise(e.target.value)} className="mt-1 h-6 w-52 px-3 border-[1px] border-black rounded-full">
+                            <select value={expertise} onChange={(e) => setExpertise(e.target.value)} className="pmt-1 h-10 w-52 px-3 border-[1px] border-black rounded-full">
                                 <option value="">Choose Expertise</option>
                                 <option value="Web Development">Web Development</option>
                                 <option value="App Development">App Development</option>
@@ -104,29 +104,10 @@ const AddModal = ({info, setModal}) => {
                             </select>
                         </div>
                     </div>
-
-                    <div className="mt-3">
-                        <h1>Skills Needed</h1>
-                        <div className="mt-3">
-                            <button className="border-[1px] border-[#123E59] text-[#123E59] px-3 rounded-full mr-2">Javascript</button>
-                            <button className="border-[1px] border-[#123E59] text-[#123E59] px-3 rounded-full mr-2">Web Dev</button>
-                            <button className="border-[1px] border-[#123E59] text-[#123E59] px-3 rounded-full mr-2">Full Stack</button>
-                            <button className="border-[1px] border-[#123E59] text-[#123E59] px-3 rounded-full mr-2">Javascript</button>
-                            <button className="border-[1px] border-[#123E59] text-[#123E59] px-3 rounded-full mr-2">+</button>
-                        </div>
-                    </div>
-
-                    <div className="mt-3">
-                        <h1>Skills Needed</h1>
-                        <div className="mt-3">
-                            <button className="border-[1px] border-[#123E59] text-[#123E59] px-3 rounded-full mr-2">Upload</button>
-                            <button className="border-[1px] border-[#123E59] text-[#123E59] px-3 rounded-full mr-2">+</button>
-                        </div>
-                    </div>
                     
                     
-                </div>
-        </>
+            </div>
+        </div>
     );
 }
 

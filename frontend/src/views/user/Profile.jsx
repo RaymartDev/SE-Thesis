@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
 import DashNav from "../../components/DashNav";
 import miks from "../../img/pm2.jpg"
-import { BiSolidMessageSquareEdit } from "react-icons/bi";
 import Footer from "../../components/Footer";
 import { IoEarthSharp } from "react-icons/io5";
 import { lazy, Suspense } from 'react'
@@ -57,28 +56,28 @@ const Profile = ({info}) => {
                                     <p className="font-bold text-sm">{info.email}</p>
                                     <p className=" text-sm">Current Email Address</p>
                                 </div>
-                                <BiSolidMessageSquareEdit size={20} className="hover:scale-110 cursor-pointer"/>
+                            
                             </div>
                             <div className="flex justify-between items-center mt-2">
                                 <div>
                                     <p className="font-bold text-sm">{info.address}</p>
                                     <p className=" text-sm">Current Address</p>
                                 </div>
-                                <BiSolidMessageSquareEdit size={20} className="hover:scale-110 cursor-pointer" />
+                                
                             </div>
                             <div className="flex justify-between items-center mt-2">
                                 <div>
                                     <p className="font-bold text-sm">{info.contact}</p>
                                     <p className=" text-sm">Contact Number</p>
                                 </div>
-                                <BiSolidMessageSquareEdit size={20} className="hover:scale-110 cursor-pointer"/>
+                            
                             </div>
                             <div className="flex justify-between items-center mt-2">
                                 <div>
                                     <p className="font-bold text-sm">{info.birthDate}</p>
                                     <p className=" text-sm">Birthdate</p>
                                 </div>
-                                <BiSolidMessageSquareEdit size={20} className="hover:scale-110 cursor-pointer"/>
+                            
                             </div>
                         </div>
 

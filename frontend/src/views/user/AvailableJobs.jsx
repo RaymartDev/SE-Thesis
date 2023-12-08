@@ -1,24 +1,18 @@
 /* eslint-disable react/prop-types */
 
 import JobList from "../../components/JobList";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { toast } from 'react-toastify'
 import { useSelector, useDispatch } from "react-redux";
 import { setJob } from '../../slices/jobSlice'
 import { useAvailableJobsQuery } from "../../slices/jobApiSlice";
 import Spinner from "../../components/Spinner";
-import JobDetailModal from '../../components/JobDetailModal'
 
-const AvailableJobs = ({modalMode, query}) => {
+const AvailableJobs = ({query}) => {
     const { data,error, isLoading } = useAvailableJobsQuery();
 
     const dispatch = useDispatch()
     const { jobsInfo } = useSelector((state) => state.jobs)
-    const [viewMode, setViewMode] = useState(true)
-    const [editMode, setEditMode] = useState(false)
-    const [applyMode, setApplyMode] = useState(false)
-
-    const modalClass = "bg-black bg-opacity-50"
 
 
     useEffect(() => {
@@ -52,7 +46,7 @@ const AvailableJobs = ({modalMode, query}) => {
         return (
             <> 
                 {jobsInfo
-                    .filter((job) => job.title.toLowerCase().includes(query.toLowerCase()))
+                    .filter((job) => job.title.toLowerCase().includes(query.toLowerCase()) || job.description.toLowerCase().includes(query.toLowerCase()))
                     .map((job) =>  (
                         <JobList
                             key={job._id}
@@ -61,7 +55,6 @@ const AvailableJobs = ({modalMode, query}) => {
                             description={job.description}
                             rate={job.rate}
                             expertise={job.expertise}
-                            modalMode={modalMode}
                         />
                     ))
                 }
@@ -81,7 +74,6 @@ const AvailableJobs = ({modalMode, query}) => {
                         description={job.description}
                         rate={job.rate}
                         expertise={job.expertise}
-                        modalMode={modalMode}
                         id={job._id}
                     />
                 ))}
@@ -97,7 +89,6 @@ const AvailableJobs = ({modalMode, query}) => {
                 description="There are no data available yet"
                 rate={0}
                 expertise={""}
-                modalMode={modalMode}
             />
         );
     }
