@@ -1,9 +1,12 @@
 /* eslint-disable no-unused-vars */
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, original } from '@reduxjs/toolkit'
 
 const initialState = {
     jobsInfo: [],
-    myJobs: []
+    myJobs: [],
+    savedJobs: [],
+    completedJobs: [],
+    proposals: []
 }
 
 const jobSlice = createSlice({
@@ -11,7 +14,7 @@ const jobSlice = createSlice({
     initialState,
     reducers: {
         addJob:(state, action) => {
-            state.jobsInfo.push(action.payload)
+            state.jobsInfo.unshift(action.payload)
         },
         // eslint-disable-next-line no-unused-vars
         setJob: (state, action) => {
@@ -20,12 +23,15 @@ const jobSlice = createSlice({
         clearJob: (state, action) => {
             state.jobsInfo = null
             state.myJobs = null
+            state.savedJobs = null
+            state.completedJobs = null
+            state.proposals = null
         },
         setMyJob: (state, action) => {
             state.myJobs = action.payload
         },
         addMyJob: (state, action) => {
-            state.myJobs.push(action.payload)
+            state.myJobs.unshift(action.payload)
         },
         updateJob: (state, action) => {
             for(let i = 0; i < state.jobsInfo.length; i++) {
@@ -39,9 +45,48 @@ const jobSlice = createSlice({
                 }
             }
         },
+        addProposal: (state, action) => {
+            const job = state.jobsInfo
+                            .find((jobInfo) => String(jobInfo._id) === String(action.payload.job))
+            job.proposals.unshift(action.payload)
+        },
+        removeProposal: (state, action) => {
+
+            const job = state.jobsInfo
+                            .find((jobInfo) => String(jobInfo._id) === String(action.payload.job))
+
+            job.proposals = job.proposals.filter((proposal) => String(proposal._id) !== String(action.payload._id))
+
+            const myJobs = state.myJobs
+                            .find((jobInfo) => String(jobInfo._id) === String(action.payload.job))
+
+            myJobs.proposals = myJobs.proposals.filter((proposal) => String(proposal._id) !== String(action.payload._id))
+            state.proposals = state.proposals.filter((proposal) => String(proposal._id) !== String(action.payload._id))
+        },
+        addSaveJob: (state, action) => {
+            state.savedJobs.unshift(action.payload)
+        },
+        setSaveJob: (state, action) => {
+            state.savedJobs = action.payload
+        },
+        setCompleteJob: (state, action) => {
+            state.completedJobs = action.payload
+        },
+        addCompleteJob: (state, action) => {
+            state.completedJobs.unshift(action.payload)
+        },
+        setProposal: (state, action) => {
+            state.proposals = action.payload
+        },
+        clearProposal: (state, action) => {
+            state.proposals = []
+        },
+        removeJob: (state, action) => {
+            state.jobsInfo = state.jobsInfo.filter((job) => String(job._id) !== String(action.payload))
+        }
     }
 })
 
-export const { addJob ,setJob, clearJob, setMyJob, addMyJob, updateJob } = jobSlice.actions
+export const { removeJob, clearProposal, setProposal, setCompleteJob,setSaveJob, addJob ,setJob, clearJob, setMyJob, addMyJob, updateJob, addProposal, removeProposal, addSaveJob } = jobSlice.actions
 
 export default jobSlice.reducer

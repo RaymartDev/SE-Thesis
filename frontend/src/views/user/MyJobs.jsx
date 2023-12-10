@@ -9,13 +9,14 @@ import { useListJobsQuery } from "../../slices/jobApiSlice";
 import Spinner from "../../components/Spinner";
 
 const MyJobs = ({query}) => {
-    const { data,error, isLoading } = useListJobsQuery();
+    const { data, refetch, error, isLoading } = useListJobsQuery();
 
     const dispatch = useDispatch()
     const { myJobs } = useSelector((state) => state.jobs)
     useEffect(() => {
+        refetch()
         dispatch(setMyJob(data))
-    }, [dispatch,data])
+    }, [refetch,dispatch,data])
 
     useEffect(() => {
         if(error) {
@@ -40,11 +41,11 @@ const MyJobs = ({query}) => {
         )
     }
     
-    if (myJobs && myJobs.length > 0 && query) {
+    if (myJobs && myJobs.filter((job) => job.status === 1 || job.status === 2).length > 0 && query) {
         return (
             <>
                 {myJobs
-                    .filter((job) => job.title.toLowerCase().includes(query.toLowerCase()) || job.description.toLowerCase().includes(query.toLowerCase()))
+                    .filter((job) => (job.status === 1 && job.status === 2) && (job.title.toLowerCase().includes(query.toLowerCase()) || job.description.toLowerCase().includes(query.toLowerCase())))
                     .map((job) =>  (
                         <JobList
                             key={job._id}
@@ -54,6 +55,7 @@ const MyJobs = ({query}) => {
                             rate={job.rate}
                             expertise={job.expertise}
                             id={job._id}
+                            pending={job.status === 2}
                         />
                     ))
                 }
@@ -61,10 +63,12 @@ const MyJobs = ({query}) => {
         )
     }
 
-    if (myJobs && myJobs.length > 0) {
+    if (myJobs && myJobs.filter((job) => job.status === 1 || job.status === 2).length > 0) {
         return (
             <>
-                {myJobs.map((job) => (
+                {myJobs
+                    .filter((job) => job.status === 1 || job.status === 2)
+                    .map((job) => (
                     <JobList
                         key={job._id}
                         title={job.title}
@@ -73,6 +77,7 @@ const MyJobs = ({query}) => {
                         rate={job.rate}
                         expertise={job.expertise}
                         id={job._id}
+                        pending={job.status === 2}
                     />
                 ))}
             </>

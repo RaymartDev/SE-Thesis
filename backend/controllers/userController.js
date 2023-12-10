@@ -4,6 +4,7 @@ import generateToken from '../utils/generateToken.js'
 import validator from 'validator';
 import Job from '../models/jobModel.js';
 import multer from 'multer'
+import mongoose from 'mongoose';
 
 const registerUser = asyncHandler(async (req, res) => {
     const { name, email, password, username, address, birthDate, contact, gender, role } = req.body
@@ -96,6 +97,22 @@ const logoutUser = asyncHandler(async (req, res) => {
 
 const getUserProfile = asyncHandler(async (req, res) => {
     res.status(200).json(req.user)
+})
+
+const getOtherProfile = asyncHandler(async (req, res) => {
+    if(!mongoose.Types.ObjectId.isValid(req.params.id)) {
+        res.status(400)
+        throw new Error(`Invalid ID ${req.params.id}`)
+    }
+
+    const user = await User.findById(req.params.id)
+
+    if(!user) {
+        res.status(404)
+        throw new Error('User not found')
+    }
+
+    res.status(200).json(user)
 })
 
 const updateProfile = asyncHandler(async (req, res) => {
@@ -234,7 +251,11 @@ const getJob = asyncHandler(async (req, res) => {
 
 // get all own jobs
 const getAllJobs = asyncHandler(async (req, res) => {
-    const user = await User.findById(req.user._id).populate('jobs');
+    const user = await User.findById(req.user._id).populate({
+        path: 'jobs',
+        populate: [{path: 'proposals'}, {path: 'employee', select: '_id name earnings jobs', populate: {path: 'jobs'}}],
+        options: { sort: { updatedAt: -1 } },
+    }).sort({updatedAt: -1});
 
     if (!user) {
         res.status(404);
@@ -247,14 +268,20 @@ const getAllJobs = asyncHandler(async (req, res) => {
 });
 
 const getSavedJobs = asyncHandler(async (req, res) => {
-    const user = await User.findById(req.user._id).populate('savedJobs').select('-password');
+    const user = await User.findById(req.user._id).populate({
+        path: 'savedJobs',
+        populate: [
+            {path: 'owner', select: '-password'},
+            {path: 'proposals'}
+        ]
+    }).select('-password');
 
     if (!user) {
         res.status(404);
         throw new Error('User not found');
     }
 
-    const { jobs } = user.savedJobs;
+    const jobs = user.savedJobs;
 
     res.json(jobs);
 });
@@ -267,12 +294,18 @@ const getCompletedJobs = asyncHandler(async (req, res) => {
         throw new Error('User not found');
     }
 
-    const { jobs } = await Job.find({owner: user._id, status: 4})
+    const jobs = await Job.find({owner: user._id, status: 4})
     res.json(jobs);
 })
 
 const getAllAvailableJobs = asyncHandler(async (req, res) => {
-    const jobs = await Job.find({}).populate({path: 'owner', select: '-password'})
+    const jobs = await Job.find({})
+                .populate([
+                    {path: 'owner', select: '-password'},
+                    {path: 'proposals'},
+                    {path: 'employee'}
+                ])
+                .sort({updatedAt: -1})
     res.json(jobs);
 });
 
@@ -400,7 +433,10 @@ const saveJob = asyncHandler(async (req, res) => {
     const user = await User.findById(req.user._id).select('-password');
     const { id } = req.body
 
-    const job = await Job.findById(id)
+    const job = await Job.findById(id).populate({
+        path: 'owner',
+        select: '-password'
+    })
 
     if (!user) {
         res.status(404);
@@ -411,9 +447,9 @@ const saveJob = asyncHandler(async (req, res) => {
         res.status(404)
         throw new Error('Job not found')
     }
-    if(String(job.owner) === String(user._id)) {
+    if(user.role === 'client') {
         res.status(403)
-        throw new Error('You are not allowed to save your own request')
+        throw new Error('You are not allowed to save request using client account')
     }
 
     if(user.savedJobs.includes(job._id)) {
@@ -421,9 +457,9 @@ const saveJob = asyncHandler(async (req, res) => {
         throw new Error('Job is already saved')
     }
 
-    user.savedJobs.push(job._id)
+    user.savedJobs.unshift(job._id)
     await user.save()
-    res.json(job)
+    res.json({job, message: 'Job saved successfully'})
 })
 
 const searchJob = asyncHandler(async (req, res) => {
@@ -453,6 +489,7 @@ export {
     // PROFILE
     getUserProfile,
     updateProfile,
+    getOtherProfile,
 
     // JOBS / REQUEST
     getJob,

@@ -4,6 +4,7 @@ import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import Spinner from './components/Spinner'
 import { useSelector } from 'react-redux'
+import OtherProfile from './views/OtherProfile'
 
 const Landing = lazy(() => import("./Landing"))
 const Register = lazy(() => import("./views/Register"))
@@ -27,6 +28,7 @@ function App() {
             <Route path="/dashboard" element={<Dashboard info={userInfo} />} />
             <Route path="/profile" element={<Profile info={userInfo} />} />
             <Route path="/loader" element={<Spinner />} />
+            <Route path="/profile/:id" element={<OtherProfile />} />
           </Routes>
         </Suspense>
       </BrowserRouter>

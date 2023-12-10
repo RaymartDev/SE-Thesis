@@ -1,5 +1,6 @@
 import mongoose from 'mongoose'
 import bcrypt from 'bcryptjs'
+import Job from './jobModel.js'
 
 export class Education {
     constructor(school, course, year) {
@@ -119,6 +120,15 @@ userSchema.pre('save', async function(next) {
     }
     const salt = await bcrypt.genSalt(10)
     this.password = await bcrypt.hash(this.password, salt)
+})
+
+userSchema.pre('remove', async function(next) {
+    if(this.role === 'client') {
+        for(const id of this.jobs) {
+            await Job.findByIdAndDelete(id)
+        }
+    }
+    next()
 })
 
 userSchema.methods.matchPasswords = async function(enteredPassword) {

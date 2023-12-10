@@ -1,4 +1,5 @@
 import mongoose from 'mongoose'
+import Proposal from './proposalModel.js'
 
 const jobSchema = mongoose.Schema({
     title: {
@@ -36,9 +37,10 @@ const jobSchema = mongoose.Schema({
         /**
          * Status
          * 1 - Active
-         * 2 - Client Done
-         * 3 - Employee Done
-         * 4 - Completed
+         * 2 - Pending / Being Worked On
+         * 3 - Client Done
+         * 4 - Employee Done
+         * 5 - Completed
          */
     },
     owner: {
@@ -46,10 +48,11 @@ const jobSchema = mongoose.Schema({
         ref: 'User',
         required: true
     },
-    candidates: {
+    proposals: {
         type: [mongoose.Schema.Types.ObjectId],
-        ref: 'User',
-        required: false
+        ref: 'Proposal',
+        required: false,
+        onDelete: 'cascade'
     },
     employee: {
         type: mongoose.Schema.Types.ObjectId,
@@ -59,6 +62,11 @@ const jobSchema = mongoose.Schema({
 },
 {
     timestamps: true
+})
+
+jobSchema.pre('remove', async function (next) {
+    await Proposal.deleteMany({ job: this._id })
+    next()
 })
 
 const Job = mongoose.model('Job', jobSchema)

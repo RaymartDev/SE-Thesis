@@ -16,7 +16,6 @@ const CompletedJob = lazy(() => import("./CompletedJob"))
 const Dashboard = ({info}) => {
     const [navPage, setNavPage] = useState(1)
     const [search, setSearch] = useState("")
-    const [modalMode, setModalMode] = useState(false)
     
     const handleActiveBtn = (e) => {
         e.preventDefault()
@@ -67,10 +66,10 @@ const Dashboard = ({info}) => {
                         </div>
                         <hr className="bg-black h-[2px]"/>
                         <Suspense fallback={<Spinner/>}>
-                            {navPage === 1 && <AvailableJobs modalMode={modalMode} query={search} />}
-                            {navPage === 2 && <MyJobs modalMode={modalMode} query={search} />}
-                            {navPage === 3 && <SavedJob modalMode={modalMode} query={search} />}
-                            {navPage === 4 && <CompletedJob modalMode={modalMode} query={search} />}
+                            {navPage === 1 && <AvailableJobs query={search} />}
+                            {navPage === 2 && <MyJobs query={search} />}
+                            {navPage === 3 && <SavedJob query={search} />}
+                            {navPage === 4 && <CompletedJob query={search} />}
                         </Suspense>
                     </div> 
                     

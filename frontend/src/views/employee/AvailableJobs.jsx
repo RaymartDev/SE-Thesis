@@ -8,7 +8,7 @@ import { setJob } from '../../slices/jobSlice'
 import { useAvailableJobsQuery } from "../../slices/jobApiSlice";
 import Spinner from "../../components/Spinner";
 
-const AvailableJobs = ({modalMode, query}) => {
+const AvailableJobs = ({query}) => {
     const { data,error, isLoading } = useAvailableJobsQuery();
 
     const dispatch = useDispatch()
@@ -44,7 +44,7 @@ const AvailableJobs = ({modalMode, query}) => {
         return (
             <>
                 {jobsInfo
-                    .filter((job) => job.title.toLowerCase().includes(query.toLowerCase()))
+                    .filter((job) => job.status === 1 && (job.title.toLowerCase().includes(query.toLowerCase())))
                     .map((job) =>  (
                         <JobList
                             key={job._id}
@@ -53,7 +53,7 @@ const AvailableJobs = ({modalMode, query}) => {
                             description={job.description}
                             rate={job.rate}
                             expertise={job.expertise}
-                            modalMode={modalMode}
+                            id={job._id}
                         />
                     ))
                 }
@@ -64,7 +64,9 @@ const AvailableJobs = ({modalMode, query}) => {
     if (jobsInfo && jobsInfo.length > 0 && !query) {
         return (
             <>
-                {jobsInfo.map((job) => (
+                {jobsInfo
+                    .filter((job) => job.status === 1)
+                    .map((job) => (
                     <JobList
                         key={job._id}
                         title={job.title}
@@ -72,7 +74,7 @@ const AvailableJobs = ({modalMode, query}) => {
                         description={job.description}
                         rate={job.rate}
                         expertise={job.expertise}
-                        modalMode={modalMode}
+                        id={job._id}
                     />
                 ))}
             </>
@@ -86,7 +88,7 @@ const AvailableJobs = ({modalMode, query}) => {
                 description="There are no data available yet"
                 rate={0}
                 expertise={""}
-                modalMode={modalMode}
+                id=""
             />
         );
     }

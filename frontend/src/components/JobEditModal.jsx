@@ -52,7 +52,7 @@ const JobEditModal = ({id, setModalType}) => {
             }).unwrap()
             console.log(res)
             dispatch(updateJob(res))
-            setModalType(0)
+            setModalType(1)
             toast.success('Successfully updated job')
         }catch(err) {
             console.log(err)
@@ -68,9 +68,9 @@ const JobEditModal = ({id, setModalType}) => {
                 <div className="bg-white z-40 w-1/2 h-2/4 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 px-10 py-10 rounded-3xl">
                 
                         <div className="flex justify-between relative">
-                        <IoCloseOutline size={30} className="absolute -right-8 -top-8 cursor-pointer" onClick={() => setModalType(0)}/>
-                            <h1 className="text-3xl font-bold">Add Job Request</h1>
-                                <button onClick={handleSubmit} className="bg-[#123E59] rounded-full text-white px-5 py-[2px]">Publish Request</button>
+                        <IoCloseOutline size={30} className="absolute -right-8 -top-8 cursor-pointer" onClick={() => setModalType(1)}/>
+                            <h1 className="text-3xl font-bold">Edit Job Request</h1>
+                                <button onClick={handleSubmit} className="bg-[#123E59] rounded-full text-white px-5 py-[2px]">Save Changes</button>
                         </div>
                         <div >
                             <div className="flex flex-col mt-2">

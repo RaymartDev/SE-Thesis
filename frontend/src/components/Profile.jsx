@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import miks from '../img/pm2.jpg'
+import miks from "../img/professional.png"
 import { IoEarth } from "react-icons/io5";
 import { CgWebsite } from "react-icons/cg";
 import { useNavigate } from "react-router-dom";

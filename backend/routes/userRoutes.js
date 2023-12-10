@@ -15,8 +15,15 @@ import {
     getAllJobs,
     getSavedJobs,
     getCompletedJobs,
-    updateJob
+    updateJob,
+    getOtherProfile
 } from '../controllers/userController.js'
+import {
+    newProposal,
+    getProposal,
+    deleteProposal,
+    approveProposal,
+} from '../controllers/proposalController.js'
 import { protect } from '../middleware/authMiddleware.js'
 
 router.post('/register', registerUser)
@@ -29,6 +36,8 @@ router
     .get(protect, getUserProfile)
     .put(protect, updateProfile)
 
+router.get('/other/:id', protect, getOtherProfile)
+
 // job related routes
 router.get('/jobs', protect, searchJob)
 router.post('/jobs/create', protect , createJob)
@@ -40,5 +49,11 @@ router.put('/jobs/update', protect, updateJob)
 router.get('/jobs/own/save', protect, getSavedJobs)
 router.get('/jobs/own/all', protect, getAllJobs)
 router.get('/jobs/own/complete', protect, getCompletedJobs)
+
+// proposal methods
+router.get('/proposal/:id', protect, getProposal)
+router.post('/proposal', protect, newProposal)
+router.delete('/proposal', protect, deleteProposal)
+router.post('/proposal/approve', protect, approveProposal)
 
 export default router

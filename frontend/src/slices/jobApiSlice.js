@@ -1,5 +1,6 @@
 import { apiSlice } from "./apiSlice";
 const JOBS_URL = '/api/users/jobs'
+const PROPOSAL_URL = '/api/users/proposal'
 
 export const usersJobApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
@@ -15,15 +16,22 @@ export const usersJobApiSlice = apiSlice.injectEndpoints({
                 method: 'GET',
             })
         }),
-        saveJob: builder.query({
-            query: () => ({
-                url: `${JOBS_URL}/own/save`,
-                method: 'GET'
+        saveJob: builder.mutation({
+            query: (body) => ({
+                url: `${JOBS_URL}/save`,
+                method: 'POST',
+                body: body
             })
         }),
         completeJob: builder.query({
             query: () => ({
                 url: `${JOBS_URL}/own/complete`,
+                method: 'GET'
+            })
+        }),
+        listSave: builder.query({
+            query: () => ({
+                url: `${JOBS_URL}/own/save`,
                 method: 'GET'
             })
         }),
@@ -40,9 +48,48 @@ export const usersJobApiSlice = apiSlice.injectEndpoints({
                 method: 'PUT',
                 body: data
             })
+        }),
+        addProposal: builder.mutation({
+            query: (data) => ({
+                url: `${PROPOSAL_URL}`,
+                method: 'POST',
+                body: data
+            })
+        }),
+        getProposal: builder.query({
+            query: (params) => ({
+                url: `${PROPOSAL_URL}/${params}`,
+                method: 'GET',
+            })
+        }),
+        deleteProposal: builder.mutation({
+            query: (data) => ({
+                url: `${PROPOSAL_URL}`,
+                method: 'DELETE',
+                body: data
+            })
+        }),
+        approveProposal: builder.mutation({
+            query: (data) => ({
+                url: `${PROPOSAL_URL}/approve`,
+                method: 'POST',
+                body: data
+            })
         })
     })
 })
 
 
-export const { useListJobsQuery, useAvailableJobsQuery, useSaveJobQuery, useCompleteJobQuery, useCreateJobMutation, useUpdateJobMutation } = usersJobApiSlice;
+export const { 
+    useListJobsQuery, 
+    useAvailableJobsQuery, 
+    useCompleteJobQuery, 
+    useCreateJobMutation, 
+    useUpdateJobMutation ,
+    useAddProposalMutation,
+    useDeleteProposalMutation,
+    useGetProposalQuery,
+    useListSaveQuery,
+    useSaveJobMutation,
+    useApproveProposalMutation
+} = usersJobApiSlice;

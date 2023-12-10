@@ -4,17 +4,17 @@ import JobList from "../../components/JobList";
 import { useEffect } from "react";
 import { toast } from 'react-toastify'
 import { useSelector, useDispatch } from "react-redux";
-import { setJob } from '../../slices/jobSlice'
+import { setCompleteJob } from '../../slices/jobSlice'
 import { useCompleteJobQuery } from "../../slices/jobApiSlice";
 import Spinner from "../../components/Spinner";
 
-const CompletedJob = () => {
+const CompletedJob = ({query}) => {
     const { data,error, isLoading } = useCompleteJobQuery();
 
     const dispatch = useDispatch()
-    const {jobsInfo } = useSelector((state) => state.jobs)
+    const { completedJobs } = useSelector((state) => state.jobs)
     useEffect(() => {
-        dispatch(setJob(data))
+        dispatch(setCompleteJob(data))
     }, [dispatch,data])
 
     useEffect(() => {
@@ -38,10 +38,31 @@ const CompletedJob = () => {
         )
     }
 
-    if (jobsInfo && jobsInfo.length > 0) {
+    if(completedJobs && completedJobs.length > 0 && query) {
         return (
             <>
-                {jobsInfo.map((job) => (
+                {completedJobs
+                    .filter((job) => job.title.toLowerCase().includes(query.toLowerCase()))
+                    .map((job) =>  (
+                        <JobList
+                            key={job._id}
+                            title={job.title}
+                            salary={job.estimatedBudget}
+                            description={job.description}
+                            rate={job.rate}
+                            expertise={job.expertise}
+                            id={job._id}
+                        />
+                    ))
+                }
+            </>
+        )
+    }
+
+    if (completedJobs && completedJobs.length > 0 && !query) {
+        return (
+            <>
+                {completedJobs.map((job) => (
                     <JobList
                         key={job._id}
                         title={job.title}
@@ -49,6 +70,7 @@ const CompletedJob = () => {
                         description={job.description}
                         rate={job.rate}
                         expertise={job.expertise}
+                        id={job._id}
                     />
                 ))}
             </>
@@ -61,7 +83,8 @@ const CompletedJob = () => {
                 salary={-1}
                 description="There are no data available yet"
                 rate={0}
-                expertise={[]}
+                expertise={""}
+                id=""
             />
         );
     }

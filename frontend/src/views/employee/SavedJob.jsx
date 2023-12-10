@@ -4,17 +4,17 @@ import JobList from "../../components/JobList";
 import { useEffect } from "react";
 import { toast } from 'react-toastify'
 import { useSelector, useDispatch } from "react-redux";
-import { setJob } from '../../slices/jobSlice'
-import { useSaveJobQuery } from "../../slices/jobApiSlice";
+import { setSaveJob } from '../../slices/jobSlice'
+import { useListSaveQuery } from "../../slices/jobApiSlice";
 import Spinner from "../../components/Spinner";
 
-const SavedJob = ({modalMode, query}) => {
-    const { data,error, isLoading } = useSaveJobQuery();
+const SavedJob = ({query}) => {
+    const { data,error, isLoading } = useListSaveQuery();
 
     const dispatch = useDispatch()
-    const {jobsInfo } = useSelector((state) => state.jobs)
+    const { savedJobs } = useSelector((state) => state.jobs)
     useEffect(() => {
-        dispatch(setJob(data))
+        dispatch(setSaveJob(data))
     }, [dispatch,data])
 
     useEffect(() => {
@@ -38,10 +38,31 @@ const SavedJob = ({modalMode, query}) => {
         )
     }
 
-    if (jobsInfo && jobsInfo.length > 0 && !query) {
+    if(savedJobs && savedJobs.length > 0 && query) {
         return (
             <>
-                {jobsInfo.map((job) => (
+                {savedJobs
+                    .filter((job) => job.title.toLowerCase().includes(query.toLowerCase()))
+                    .map((job) =>  (
+                        <JobList
+                            key={job._id}
+                            title={job.title}
+                            salary={job.estimatedBudget}
+                            description={job.description}
+                            rate={job.rate}
+                            expertise={job.expertise}
+                            id={job._id}
+                        />
+                    ))
+                }
+            </>
+        )
+    }
+
+    if (savedJobs && savedJobs.length > 0 && !query) {
+        return (
+            <>
+                {savedJobs.map((job) => (
                     <JobList
                         key={job._id}
                         title={job.title}
@@ -49,7 +70,7 @@ const SavedJob = ({modalMode, query}) => {
                         description={job.description}
                         rate={job.rate}
                         expertise={job.expertise}
-                        modalMode={modalMode}
+                        id={job._id}
                     />
                 ))}
             </>
@@ -63,7 +84,7 @@ const SavedJob = ({modalMode, query}) => {
                 description="There are no data available yet"
                 rate={0}
                 expertise={""}
-                modalMode={modalMode}
+                id=""
             />
         );
     }

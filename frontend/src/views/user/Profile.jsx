@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import DashNav from "../../components/DashNav";
-import miks from "../../img/pm2.jpg"
+import miks from "../../img/professional.png"
 import Footer from "../../components/Footer";
 import { IoEarthSharp } from "react-icons/io5";
 import { lazy, Suspense } from 'react'

@@ -5,7 +5,7 @@ const baseQuery = fetchBaseQuery({ baseUrl: '' })
 export const apiSlice = createApi({
     baseQuery,
     tagTypes: ['Job'],  
-    refetchOnMountOrArgChange: 10,
+    refetchOnMountOrArgChange: 0,
     // eslint-disable-next-line no-unused-vars
     endpoints: (builder) => ({})
 })

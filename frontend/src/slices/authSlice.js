@@ -1,7 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-    userInfo: localStorage.getItem('userInfo') ? JSON.parse(localStorage.getItem('userInfo')) : null
+    userInfo: localStorage.getItem('userInfo') ? JSON.parse(localStorage.getItem('userInfo')) : null,
+    otherInfo: {}
 }
 
 const authSlice = createSlice({
@@ -15,11 +16,15 @@ const authSlice = createSlice({
         // eslint-disable-next-line no-unused-vars
         logout: (state, action) => {
             state.userInfo = null
+            state.otherInfo = null
             localStorage.removeItem('userInfo')
+        },
+        setOtherInfo: (state, action) => {
+            state.otherInfo = action.payload
         }
     }
 })
 
-export const { setCredentials,logout } = authSlice.actions
+export const { setCredentials,logout, setOtherInfo } = authSlice.actions
 
 export default authSlice.reducer

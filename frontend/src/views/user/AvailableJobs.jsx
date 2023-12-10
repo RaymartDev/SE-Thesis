@@ -9,15 +9,16 @@ import { useAvailableJobsQuery } from "../../slices/jobApiSlice";
 import Spinner from "../../components/Spinner";
 
 const AvailableJobs = ({query}) => {
-    const { data,error, isLoading } = useAvailableJobsQuery();
+    const { data,error, refetch, isLoading } = useAvailableJobsQuery();
 
     const dispatch = useDispatch()
     const { jobsInfo } = useSelector((state) => state.jobs)
 
 
     useEffect(() => {
+        refetch()
         dispatch(setJob(data))
-    }, [dispatch,data])
+    }, [refetch,dispatch,data])
 
     useEffect(() => {
         if(error) {
@@ -42,11 +43,11 @@ const AvailableJobs = ({query}) => {
         )
     }
 
-    if (jobsInfo && jobsInfo.length > 0 && query) {
+    if (jobsInfo && jobsInfo.filter((job) => job.status === 1).length > 0 && query) {
         return (
             <> 
                 {jobsInfo
-                    .filter((job) => job.title.toLowerCase().includes(query.toLowerCase()) || job.description.toLowerCase().includes(query.toLowerCase()))
+                    .filter((job) => job.status === 1 && (job.title.toLowerCase().includes(query.toLowerCase()) || job.description.toLowerCase().includes(query.toLowerCase())))
                     .map((job) =>  (
                         <JobList
                             key={job._id}
@@ -55,6 +56,7 @@ const AvailableJobs = ({query}) => {
                             description={job.description}
                             rate={job.rate}
                             expertise={job.expertise}
+                            id={job._id}
                         />
                     ))
                 }
@@ -62,11 +64,13 @@ const AvailableJobs = ({query}) => {
         )
     }
 
-    if (jobsInfo && jobsInfo.length > 0 && !query) {
+    if (jobsInfo && jobsInfo.filter((job) => job.status === 1).length > 0 && !query) {
         return (
             <>
             <div>
-                {jobsInfo.map((job) => (
+                {jobsInfo
+                    .filter((job) => job.status === 1)
+                    .map((job) => (
                     <JobList
                         key={job._id}
                         title={job.title}

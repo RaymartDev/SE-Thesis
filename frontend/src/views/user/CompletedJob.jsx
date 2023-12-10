@@ -4,17 +4,17 @@ import JobList from "../../components/JobList";
 import { useEffect } from "react";
 import { toast } from 'react-toastify'
 import { useSelector, useDispatch } from "react-redux";
-import { setJob } from '../../slices/jobSlice'
+import { setCompleteJob } from '../../slices/jobSlice'
 import { useCompleteJobQuery } from "../../slices/jobApiSlice";
 import Spinner from "../../components/Spinner";
 
-const CompletedJob = ({modalMode, query}) => {
+const CompletedJob = ({query}) => {
     const { data,error, isLoading } = useCompleteJobQuery();
 
     const dispatch = useDispatch()
-    const {jobsInfo } = useSelector((state) => state.jobs)
+    const { completedJobs } = useSelector((state) => state.jobs)
     useEffect(() => {
-        dispatch(setJob(data))
+        dispatch(setCompleteJob(data))
     }, [dispatch,data])
 
     useEffect(() => {
@@ -38,10 +38,10 @@ const CompletedJob = ({modalMode, query}) => {
         )
     }
 
-    if (jobsInfo && jobsInfo.length > 0 && query) {
+    if (completedJobs && completedJobs.length > 0 && query) {
         return (
             <>
-                {jobsInfo
+                {completedJobs
                     .filter((job) => job.title.toLowerCase().includes(query.toLowerCase()))
                     .map((job) =>  (
                         <JobList
@@ -51,7 +51,7 @@ const CompletedJob = ({modalMode, query}) => {
                             description={job.description}
                             rate={job.rate}
                             expertise={job.expertise}
-                            modalMode={modalMode}
+                            job={job._id}
                         />
                     ))
                 }
@@ -59,10 +59,10 @@ const CompletedJob = ({modalMode, query}) => {
         )
     }
 
-    if (jobsInfo && jobsInfo.length > 0) {
+    if (completedJobs && completedJobs.length > 0) {
         return (
             <>
-                {jobsInfo.map((job) => (
+                {completedJobs.map((job) => (
                     <JobList
                         key={job._id}
                         title={job.title}
@@ -70,7 +70,7 @@ const CompletedJob = ({modalMode, query}) => {
                         description={job.description}
                         rate={job.rate}
                         expertise={job.expertise}
-                        modalMode={modalMode}
+                        job={job._id}
                     />
                 ))}
             </>
@@ -83,8 +83,8 @@ const CompletedJob = ({modalMode, query}) => {
                 salary={-1}
                 description="There are no data available yet"
                 rate={0}
-                expertise={[]}
-                modalMode={modalMode}
+                expertise={""}
+                job=""
             />
         );
     }

@@ -1,9 +1,7 @@
 /* eslint-disable react/prop-types */
 import DashNav from "../../components/DashNav";
-import miks from "../../img/pm2.jpg"
-import { BiSolidMessageSquareEdit } from "react-icons/bi";
+import miks from "../../img/professional.png"
 import Footer from "../../components/Footer";
-import { FaGlobeAfrica } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa";
 import { IoEarthSharp } from "react-icons/io5";
 import { FaKey } from "react-icons/fa";
@@ -61,28 +59,24 @@ const Profile = ({info}) => {
                                     <p className="font-bold text-sm">{info.email}</p>
                                     <p className=" text-sm">Current Email Address</p>
                                 </div>
-                                <BiSolidMessageSquareEdit size={20} className="hover:scale-110 cursor-pointer"/>
                             </div>
                             <div className="flex justify-between items-center mt-2">
                                 <div>
                                     <p className="font-bold text-sm">{info.address}</p>
                                     <p className=" text-sm">Current Address</p>
                                 </div>
-                                <BiSolidMessageSquareEdit size={20} className="hover:scale-110 cursor-pointer" />
                             </div>
                             <div className="flex justify-between items-center mt-2">
                                 <div>
                                     <p className="font-bold text-sm">{info.contact}</p>
                                     <p className=" text-sm">Contact Number</p>
                                 </div>
-                                <BiSolidMessageSquareEdit size={20} className="hover:scale-110 cursor-pointer"/>
                             </div>
                             <div className="flex justify-between items-center mt-2">
                                 <div>
                                     <p className="font-bold text-sm">{info.birthDate}</p>
                                     <p className=" text-sm">Birthdate</p>
                                 </div>
-                                <BiSolidMessageSquareEdit size={20} className="hover:scale-110 cursor-pointer"/>
                             </div>
                         </div>
 
@@ -165,9 +159,9 @@ const Profile = ({info}) => {
                         ) : (
                                 <JobDescription 
                                     key={1}
-                                    title='Your Job Title'
+                                    title='Job Title'
                                     year='(starting year - end year)'
-                                    description='Your Job Description'
+                                    description='Job Description'
                                 />
                     )}
                     
@@ -176,7 +170,6 @@ const Profile = ({info}) => {
                 <div className="px-5 py-5">
                     <div className="flex justify-between">
                         <h1 className="font-bold text-3xl">Portfolio</h1>
-                        <BiSolidMessageSquareEdit size={25} className="hover:scale-110 cursor-pointer"/>
                     </div>
                     {info.projects && info.projects.length > 0 ? (
                             info.projects.map((item, index) => (
@@ -189,8 +182,8 @@ const Profile = ({info}) => {
                         ) : (
                                 <ProjectDescription 
                                     key={1}
-                                    title='Your Project Title / Link'
-                                    description='Your Project Description'
+                                    title='Project Title / Link'
+                                    description="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum"
                                 />
                     )}
                 
