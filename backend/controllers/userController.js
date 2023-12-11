@@ -11,10 +11,54 @@ const registerUser = asyncHandler(async (req, res) => {
 
     const emailExists = await User.findOne({ email })
 
+    if(!validator.isEmail(email)) {
+        res.status(400)
+        throw new Error('Email must be a valid email address')
+    }
+
     if(emailExists) {
         res.status(400)
         throw new Error('Email already exists')
     }
+
+    const regex = new RegExp(/^(09|\+639)\d{9}$/)
+    if(!regex.test(contact)) {
+        res.status(400)
+        throw new Error('Contact must be a valid')
+    }
+
+    if(gender.trim().toLowerCase() !== "male" && gender.trim().toLowerCase() !== "female") {
+        res.status(400)
+        throw new Error('Only accepting Male or Female as gender')
+    }
+
+    const passwordRegex = new RegExp(/^(?=.*[A-Z])(?=.*[\W_]).{5,}$/)
+
+    if(!passwordRegex.test(password)) {
+        res.status(400)
+        throw new Error('Password must be at least 5 characters, 1 Special character and 1 capital')
+    }
+
+    const birthdate = new Date(birthDate);
+    const currentDate = new Date();
+    const ageInMilliseconds = currentDate - birthdate;
+    const ageInYears = Math.floor(ageInMilliseconds / (365.25 * 24 * 60 * 60 * 1000));
+
+    if(ageInYears < 15) {
+        res.status(400)
+        throw new Error('You must be at least 15 years old to register')
+    }
+
+    if(username.length < 5) {
+        res.status(400)
+        throw new Error('Username must contains at least 5 characters')
+    }
+
+    if(name.length < 5) {
+        res.status(400)
+        throw new Error('Full name must contains at least 5 characters')
+    }
+
 
     const userExists = await User.findOne({ username: username.toLowerCase() })
     if(userExists) {

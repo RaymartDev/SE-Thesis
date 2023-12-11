@@ -2,35 +2,19 @@
 
 import JobList from "../../components/JobList";
 import { useEffect } from "react";
-import { toast } from 'react-toastify'
 import { useSelector, useDispatch } from "react-redux";
 import { setCompleteJob } from '../../slices/jobSlice'
 import { useCompleteJobQuery } from "../../slices/jobApiSlice";
 import Spinner from "../../components/Spinner";
 
 const CompletedJob = ({query}) => {
-    const { data,error, isLoading } = useCompleteJobQuery();
+    const { data, isLoading } = useCompleteJobQuery();
 
     const dispatch = useDispatch()
     const { completedJobs } = useSelector((state) => state.jobs)
     useEffect(() => {
         dispatch(setCompleteJob(data))
     }, [dispatch,data])
-
-    useEffect(() => {
-        if(error) {
-            toast.error(error.data.message, {
-                position: "bottom-left",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: false,
-                draggable: true,
-                progress: undefined,
-                theme: "light",
-            })
-        }
-    }, [error])
 
     if(isLoading) {
         return (

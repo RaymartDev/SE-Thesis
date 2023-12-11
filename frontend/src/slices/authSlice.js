@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { clearJob } from './jobSlice'
 
 const initialState = {
     userInfo: localStorage.getItem('userInfo') ? JSON.parse(localStorage.getItem('userInfo')) : null,
@@ -18,6 +19,7 @@ const authSlice = createSlice({
             state.userInfo = null
             state.otherInfo = null
             localStorage.removeItem('userInfo')
+            clearJob()
         },
         setOtherInfo: (state, action) => {
             state.otherInfo = action.payload

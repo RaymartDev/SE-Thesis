@@ -44,6 +44,8 @@ const Register = () => {
     }, [navigate, userInfo])
 
     const submitHandler = async (e) => {
+
+
         e.preventDefault()
         try {
             const res = await register({ role, name, gender, birthDate, contact: contactNumber, address, username, password, email }).unwrap()

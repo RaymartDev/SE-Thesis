@@ -22,13 +22,13 @@ function App() {
         <Suspense fallback={<Spinner />}>
           <ToastContainer />
           <Routes>
-            <Route path="/" element={<Landing info={userInfo} />}/>
+            <Route path="/" element={<Landing />}/>
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-            <Route path="/dashboard" element={<Dashboard info={userInfo} />} />
-            <Route path="/profile" element={<Profile info={userInfo} />} />
+            <Route path="/dashboard" element={userInfo ? (<Dashboard info={userInfo} />) : (<Landing />)} />
+            <Route path="/profile" element={userInfo ? (<Profile info={userInfo} />) : (<Landing />)} />
             <Route path="/loader" element={<Spinner />} />
-            <Route path="/profile/:id" element={<OtherProfile />} />
+            <Route path="/profile/:id" element={userInfo ? (<OtherProfile />) : (<Landing />)} />
           </Routes>
         </Suspense>
       </BrowserRouter>

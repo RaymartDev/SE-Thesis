@@ -2,7 +2,6 @@
 
 import JobList from "../../components/JobList";
 import { useEffect } from "react";
-import { toast } from 'react-toastify'
 import { useSelector, useDispatch } from "react-redux";
 import { setMyJob } from '../../slices/jobSlice'
 import { useListJobsQuery } from "../../slices/jobApiSlice";
@@ -17,23 +16,6 @@ const MyJobs = ({query}) => {
         refetch()
         dispatch(setMyJob(data))
     }, [refetch,dispatch,data])
-
-    useEffect(() => {
-        if(error) {
-            if(error.data) {
-                toast.error(error.data.message, {
-                    position: "bottom-left",
-                    autoClose: 5000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: false,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "light",
-                })
-            }
-        }
-    }, [error])
 
     if(isLoading) {
         return (

@@ -9,7 +9,7 @@ import { useAvailableJobsQuery } from "../../slices/jobApiSlice";
 import Spinner from "../../components/Spinner";
 
 const AvailableJobs = ({query}) => {
-    const { data,error, refetch, isLoading } = useAvailableJobsQuery();
+    const { data, refetch, isLoading } = useAvailableJobsQuery();
 
     const dispatch = useDispatch()
     const { jobsInfo } = useSelector((state) => state.jobs)
@@ -19,23 +19,6 @@ const AvailableJobs = ({query}) => {
         refetch()
         dispatch(setJob(data))
     }, [refetch,dispatch,data])
-
-    useEffect(() => {
-        if(error) {
-            if(error.data) {
-                toast.error(error.data.message, {
-                    position: "bottom-left",
-                    autoClose: 5000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: false,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "light",
-                })
-            }
-        }
-    }, [error])
 
     if(isLoading) {
         return (

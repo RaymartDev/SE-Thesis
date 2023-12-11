@@ -48,7 +48,8 @@ const JobEditModal = ({id, setModalType}) => {
                 _id:job._id,
                 title,
                 description,
-                expertise
+                expertise,
+                estimatedBudget:budget
             }).unwrap()
             console.log(res)
             dispatch(updateJob(res))
