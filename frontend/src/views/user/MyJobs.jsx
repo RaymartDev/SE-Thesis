@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 
-import JobList from "../../components/JobList";
+import MyJobList from "../../components/MyJobList";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setMyJob } from '../../slices/jobSlice'
@@ -8,7 +8,7 @@ import { useListJobsQuery } from "../../slices/jobApiSlice";
 import Spinner from "../../components/Spinner";
 
 const MyJobs = ({query}) => {
-    const { data, refetch, error, isLoading } = useListJobsQuery();
+    const { data, refetch, isLoading } = useListJobsQuery();
 
     const dispatch = useDispatch()
     const { myJobs } = useSelector((state) => state.jobs)
@@ -29,7 +29,7 @@ const MyJobs = ({query}) => {
                 {myJobs
                     .filter((job) => (job.status === 1 && job.status === 2) && (job.title.toLowerCase().includes(query.toLowerCase()) || job.description.toLowerCase().includes(query.toLowerCase())))
                     .map((job) =>  (
-                        <JobList
+                        <MyJobList
                             key={job._id}
                             title={job.title}
                             salary={job.estimatedBudget}
@@ -51,7 +51,7 @@ const MyJobs = ({query}) => {
                 {myJobs
                     .filter((job) => job.status === 1 || job.status === 2)
                     .map((job) => (
-                    <JobList
+                    <MyJobList
                         key={job._id}
                         title={job.title}
                         salary={job.estimatedBudget}
@@ -66,7 +66,7 @@ const MyJobs = ({query}) => {
         );
     } else {
         return (
-            <JobList
+            <MyJobList
                 key={1}
                 title="No data Available"
                 salary={-1}
