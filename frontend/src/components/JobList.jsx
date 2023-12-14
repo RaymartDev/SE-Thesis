@@ -8,6 +8,8 @@ import ViewApplicant from './ViewApplicantModal'
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from '../slices/authSlice'
+import { FaFlag } from "react-icons/fa";
+import AddReportModal from './AddReportModal'
 
 const JobList = (props) => {
 
@@ -40,9 +42,10 @@ const JobList = (props) => {
             {(modalType === 2 && info) && <JobEditModal id={props.id} setModalType={setModalType} />}
             {(modalType === 3 && info) && <ViewApplicant id={props.id} setModalType={setModalType} />}
             {(modalType === 4 && info) && <AddProposalModal id={props.id} setModalType={setModalType}/>}
-            <div onClick={handleClick} className="px-6 py-8">
+            {(modalType === 5 && info) && <AddReportModal id={props.id} setModalType={setModalType}/>}
+            <div className="relative px-6 py-8">
                 <div>
-                    <h1 className="cursor-pointer text-2xl overflow-hidden max-h-8 text-[#123E59]" onClick={handleClick}>{props.title} <span className='text-red-700'>{props.pending ? " - [JOB TAKEN]" : ""}</span></h1>
+                    <h1 className="cursor-pointer text-2xl overflow-hidden max-h-8 text-[#123E59] max-w-sm" onClick={handleClick}>{props.title} <span className='text-red-700'>{props.pending ? " - [JOB TAKEN]" : ""}</span></h1>
                     {props.salary >= 0 && <p className="font-bold mt-3">Estimated. Budget ₱{props.salary}</p>}
                     {props.rate > 0 && <p className="font-bold mt-3">Hourly Rate ₱{props.rate}</p>}
                     <div className="overflow-hidden m-h-28">
@@ -53,6 +56,8 @@ const JobList = (props) => {
                 <div className="mt-3">
                     <Oval key={1} name={props.expertise}/>
                 </div>
+
+                <FaFlag onClick={() => setModalType(5)} className='absolute right-10 top-10 cursor-pointer text-red-700 font-bold' />
             </div>
         </>
     );

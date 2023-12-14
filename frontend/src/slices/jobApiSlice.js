@@ -1,6 +1,7 @@
 import { apiSlice } from "./apiSlice";
 const JOBS_URL = '/api/users/jobs'
 const PROPOSAL_URL = '/api/users/proposal'
+const REPORT_URL = '/api/users/report'
 
 export const usersJobApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
@@ -75,6 +76,13 @@ export const usersJobApiSlice = apiSlice.injectEndpoints({
                 method: 'POST',
                 body: data
             })
+        }),
+        addReport: builder.mutation({
+            query: (data) => ({
+                url: `${REPORT_URL}`,
+                method: 'POST',
+                body: data
+            })
         })
     })
 })
@@ -91,5 +99,6 @@ export const {
     useGetProposalQuery,
     useListSaveQuery,
     useSaveJobMutation,
-    useApproveProposalMutation
+    useApproveProposalMutation,
+    useAddReportMutation
 } = usersJobApiSlice;

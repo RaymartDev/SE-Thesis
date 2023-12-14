@@ -1,5 +1,6 @@
 import mongoose from 'mongoose'
 import Proposal from './proposalModel.js'
+import Report from './reportModel.js'
 
 const jobSchema = mongoose.Schema({
     title: {
@@ -54,6 +55,12 @@ const jobSchema = mongoose.Schema({
         required: false,
         onDelete: 'cascade'
     },
+    reports: {
+        type: [mongoose.Schema.Types.ObjectId],
+        ref: 'Report',
+        required: false,
+        onDelete: 'cascade'
+    },
     employee: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
@@ -66,6 +73,7 @@ const jobSchema = mongoose.Schema({
 
 jobSchema.pre('remove', async function (next) {
     await Proposal.deleteMany({ job: this._id })
+    await Report.deleteMany({ job: this._id })
     next()
 })
 

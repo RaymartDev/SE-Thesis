@@ -6,11 +6,9 @@ import {
     logoutUser,
     getUserProfile,
     updateProfile,
-    getJob,
     createJob,
     saveJob,
     searchJob,
-    getAvailableJobs,
     getAllAvailableJobs,
     getAllJobs,
     getSavedJobs,
@@ -25,6 +23,7 @@ import {
     approveProposal,
 } from '../controllers/proposalController.js'
 import { protect } from '../middleware/authMiddleware.js'
+import { newReport, getReport } from '../controllers/reportController.js'
 
 router.post('/register', registerUser)
 router.post('/login', loginUser)
@@ -55,5 +54,9 @@ router.get('/proposal/:id', protect, getProposal)
 router.post('/proposal', protect, newProposal)
 router.delete('/proposal', protect, deleteProposal)
 router.post('/proposal/approve', protect, approveProposal)
+
+// report methods
+router.get('/report', protect, getReport)
+router.post('/report', protect, newReport)
 
 export default router
