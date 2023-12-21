@@ -19,10 +19,12 @@ A seamless, safe, and user-friendly experience is enhanced by these languages.
 
 ## Installation Instructions
 1. Create a .env file inside backend directory and put the following:
+    ```
     NODE_ENV=development
     PORT=5000
     MONGO_URI=mongodb+srv://raymart:raymart@cluster0.8wocj97.mongodb.net/setech?retryWrites=true&w=majority
     SECRET_KEY=SETech
+    ```
 2. Install backend packages
     - cd backend
     - npm i bcryptjs cookie-parser dotenv express express-async-handler jsonwebtoken mongoose multer validator
