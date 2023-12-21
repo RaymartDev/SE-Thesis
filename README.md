@@ -30,5 +30,5 @@ A seamless, safe, and user-friendly experience is enhanced by these languages.
     - npm i bcryptjs cookie-parser dotenv express express-async-handler jsonwebtoken mongoose multer validator
 3. Install frontend packages
     - cd frontend
-    - npm i @reduxjs/toolkit react-icons react-router-dom react-router-hash-link react-toastify
+    - npm i @reduxjs/toolkit react-icons react-redux react-router-dom react-router-hash-link react-toastify
     - npm i -D vite tailwindcss postcss autoprefixer
