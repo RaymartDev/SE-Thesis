@@ -5,3 +5,14 @@ To enable meaningful interactions, users can register on SE Tech Hive, create an
 relationships between clients and independent contractors. Make use of our platform to collaborate, communicate, and finish projects quickly.
 Freelancer Platform uses a variety of computer languages behind the scenes, including as JavaScript, Taliwind, ReactJs, and MongoDB for databases. 
 A seamless, safe, and user-friendly experience is enhanced by these languages.
+
+## Technologies
+- MongoDB
+- Express JS
+- React JS 
+- Node JS
+
+## Contributors
+- Raymart Sarmiento
+- Nico Ortega
+- Micholo Buenafe
