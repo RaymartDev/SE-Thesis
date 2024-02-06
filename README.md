@@ -14,6 +14,9 @@ A seamless, safe, and user-friendly experience is enhanced by these languages.
 <p align="center">
 <img src="https://github.com/RaymartDev/SE-Thesis/assets/91418776/d0dea2e2-84b8-4dda-89ba-e666735d0714">
 </p>
+<p align="center">
+<img src="https://github.com/RaymartDev/SE-Thesis/assets/91418776/72f6a1dc-d77f-4288-b8eb-3bcaf0d29c27">
+</p>
 
 
 You can check the prototype at this link: https://www.figma.com/file/wdaCi5VrfUDX3DvMzCqe6h/Web-Dev?type=design&node-id=0%3A1&mode=design&t=XmTyIfjhRmCwxxxD-1
