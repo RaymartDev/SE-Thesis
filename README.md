@@ -1,4 +1,7 @@
-# SE Tech Hive
+<h1 align="center">
+  SE Tech Hive
+</h1>
+
 Welcome to SE Tech Hive, the website that facilitates easy connections between clients in need of top-notch skills and services and freelancers. 
 Freelancer Platform is here to make your experience as a freelancer easier, whether you're a client in need of specialized support or a freelancer searching for interesting projects.
 To enable meaningful interactions, users can register on SE Tech Hive, create an engaging profile, and publish thorough project descriptions.
