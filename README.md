@@ -27,11 +27,10 @@ A seamless, safe, and user-friendly experience is enhanced by these languages.
     ```
 2. Install backend packages
     - cd backend
-    - npm i bcryptjs cookie-parser dotenv express express-async-handler jsonwebtoken mongoose multer validator
+    - npm i
 3. Install frontend packages
     - cd frontend
-    - npm i @reduxjs/toolkit react-icons react-redux react-router-dom react-router-hash-link react-toastify
-    - npm i -D vite tailwindcss postcss autoprefixer
+    - npm i
 4. Finally run frontend and backend concurrently
    - cd backend
    - npm start ( Wait for the backend to connect to MongoDB )
