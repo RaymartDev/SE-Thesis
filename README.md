@@ -11,6 +11,8 @@ relationships between clients and independent contractors. Make use of our platf
 Freelancer Platform uses a variety of computer languages behind the scenes, including as JavaScript, Taliwind, ReactJs, and MongoDB for databases. 
 A seamless, safe, and user-friendly experience is enhanced by these languages.
 
+You can check the prototype at this link: https://www.figma.com/file/wdaCi5VrfUDX3DvMzCqe6h/Web-Dev?type=design&node-id=0%3A1&mode=design&t=XmTyIfjhRmCwxxxD-1
+
 ### Technologies
 
 - Front-end (Vite React, Tailwind CSS)
@@ -41,3 +43,5 @@ A seamless, safe, and user-friendly experience is enhanced by these languages.
    - npm start ( Wait for the backend to connect to MongoDB )
    - cd frontend
    - npm run dev
+
+
