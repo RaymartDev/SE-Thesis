@@ -7,10 +7,9 @@ Freelancer Platform uses a variety of computer languages behind the scenes, incl
 A seamless, safe, and user-friendly experience is enhanced by these languages.
 
 ## Technologies
-- MongoDB
-- Express JS
-- React JS 
-- Node JS
+- Front-end (Vite React, Tailwind CSS)
+- Back-end (Node JS, Express JS)
+- Database (MongoDB)
 
 ## Contributors
 - Raymart Sarmiento
